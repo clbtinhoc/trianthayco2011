@@ -5,7 +5,9 @@ router.post('/add', (req, res) => {
     // Expected piece of data:
     // {
     //     "identity": {
-    //         "name": "string" otherwise null, 
+    //         "name": "string" otherwise null,
+    //         "class": "string" otherwise null,
+    //         "year" : "string" otherwise null
     //     },
     //     "content": {
     //         "wish": "string",
@@ -13,7 +15,6 @@ router.post('/add', (req, res) => {
     //     }
     // }
 
-    console.log(req.body);
 
     // Escape everything in the data
     const data = JSON.parse(JSON.stringify(req.body));
@@ -52,7 +53,7 @@ function checkTeacherName(teacherName, callback) {
 function add(data){
     admin.firestore().collection('Content').doc(data.content.teacherName).update({
         wishes: admin.firestore.FieldValue.arrayUnion({
-            name: data.identity.name,
+            identity: data.identity,
             wish: data.content.wish
         })
     })
