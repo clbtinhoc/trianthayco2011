@@ -20,10 +20,14 @@ router.post('/add', (req, res) => {
     
     checkTeacherName(data.content.teacherName, () => {
         add(data);
+
     });
    
-    
-    res.send('ok')
+    res.send({
+        status: 'success',
+        message: 'Wish added'
+    })
+
 })
 
 
