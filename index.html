@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    input {
+        display: block;
+    }
+    textarea{
+        display: block;
+    }
+    
+</style>
+
+<body>
+    <form>
+        <fieldset>
+            <legend>Thông tin cá nhân</legend>
+            <label>Họ và tên</label>
+            <input type="text">
+            <label>Lớp</label>
+            <input type="text">
+            <label>Năm học</label>
+            <select>
+                <option>2021-2022</option>
+                <option>2020-2021</option>
+                <!--TỰ VIẾT TIẾP-->
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Lời chúc thầy cô</legend>
+            <label>Họ và tên Thầy Cô</label>
+            <input type="text">
+            <label>Lời chúc</label>
+            <textarea name="greetings">blah blah blah</textarea>
+        </fieldset>
+        <fieldset>
+            <legend>Lựa chọn ẩn danh</legend>
+            <input type="radio" name="anon">
+            <label>Ẩn danh tên</label>
+            <input type="radio" name="anon">
+            <label>Ẩn danh hết</label>
+            <input type="radio" name="anon">
+            <label>Không ẩn danh</label>
+        </fieldset>
+        <input type="submit" value = "Gửi">
+        <input type="reset">
+    </form>
+</body>
+</html>
