@@ -11,8 +11,9 @@ app.use(cors({ origin: true }));
 app.use(bodyParser.json());
 
 const add = require('./src/add');
-
+const getTeacherNames = require('./src/getTeacherNames')
 app.use('/', add);
+app.use('/', getTeacherNames);
 
 
 app.get('/', (req, res) => {
