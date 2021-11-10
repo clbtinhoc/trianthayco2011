@@ -49,7 +49,7 @@ function checkTeacherName(teacherName, callback) {
 function add(data){
     admin.firestore().collection('Content').doc(data.content.teacherName).update({
         wishes: admin.firestore.FieldValue.arrayUnion({
-            name: data.identity.name,
+            identity: data.identity,
             wish: data.content.wish
         })
     })

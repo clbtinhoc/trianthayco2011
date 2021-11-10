@@ -12,10 +12,10 @@ app.use(bodyParser.json());
 
 const add = require('./src/add');
 const getTeacherNames = require('./src/getTeacherNames')
+const getTeacherWishes = require('./src/getTeacherWishes');
 app.use('/', add);
 app.use('/', getTeacherNames);
-
-
+app.use('/', getTeacherWishes);
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
