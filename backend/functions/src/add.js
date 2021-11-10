@@ -33,16 +33,12 @@ router.post('/add', (req, res) => {
 // If it doesn't, create one
 function checkTeacherName(teacherName, callback) {
     admin.firestore().collection('Content').doc(teacherName).get().then(doc => {
-        if (doc.exists) {
-            console.log('Teacher name exists');
-            callback()
-        } else {
-            console.log('Teacher name does not exist');
+        if (!doc.exists){
             admin.firestore().collection('Content').doc(teacherName).set({
                 wishes: [],
             })
-            callback()
         }
+	callback()
     })
 }
 

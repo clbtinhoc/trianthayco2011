@@ -1,0 +1,42 @@
+#form form {
+    /* background-color: #E5E5E5; */
+    width: 50vw;
+}
+
+#form {
+    margin: auto;
+}
+
+#form form #form-group-2 {
+    /* display: flex;
+    justify-content: flex-start; */
+    display: inline-block;
+    /* display: flex; */
+}
+
+#form div {
+    margin: auto;
+    /* padding: 0; */
+    /* text-align: center; */
+}
+
+#a-rectangle {
+    position: absolute;
+    width: 45vw;
+    height: 100vh;
+    /* left: 145px;
+    top: 260px; */
+    background: #FFE4BB;
+    border-radius: 30px;
+    z-index: -1;
+}
+
+#form #form-bg {
+    position: absolute;
+    /* left: -4px;
+    top: 80px; */
+    mix-blend-mode: normal;
+    opacity: 0.5;
+    width: 50vw;
+    z-index: -2;
+}
