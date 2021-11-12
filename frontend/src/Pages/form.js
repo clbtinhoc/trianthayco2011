@@ -17,6 +17,8 @@ export default class FormToReg extends React.Component {
             anonYear: false,
             wish: null,
             submit: false,
+            existingTeachers: [],
+            differentTeacher: true, // Actually true at first for the disabled thing lmao
         }
         this.years = [{ value: "2016-2017", label: "2016-2017" },
         { value: "2017-2018", label: "2017-2018" },
@@ -27,6 +29,16 @@ export default class FormToReg extends React.Component {
         ]
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    componentDidMount() {
+        fetch("http://localhost:5001/tri-an-2011/us-central1/api//getTeacherNames")
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    existingTeachers: data
+                })
+            })
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         this.setState({ submit: true });
@@ -52,6 +64,11 @@ export default class FormToReg extends React.Component {
             })
     }
     render() {
+        console.log(this.state.existingTeachers)
+        console.log(this.state.teacher)
+        let teacherOptions = this.state.existingTeachers.map(teacher => {
+            return { value: teacher, label: teacher }
+        })
         if (!this.state.submit) {
             return (
                 <div id="form">
@@ -100,9 +117,26 @@ export default class FormToReg extends React.Component {
 
                         </div>
                         <div id="form-group-teacher">
-                            <input type="text" placeholder="Gửi đến họ tên của thầy/cô" id="teacherInput" required onChange={(e) => {
+                            <div className="checkBox-anon">
+                                <input type="checkbox" id="anon-teacher" onChange={(e) => {
+                                    this.setState({ differentTeacher: !this.state.differentTeacher });
+                                    document.getElementById("teacherInput").disabled = !this.state.differentTeacher;
+                                }}></input>
+                                <label for="anon-teacher">Thầy/cô khác</label>
+
+
+                            </div>
+                            <Select value={this.state.teacher} options={teacherOptions} onChange={
+                                (selectedOption) => {
+                                    this.setState({ teacher: selectedOption })
+                                }
+                            }
+                                isDisabled={!this.state.differentTeacher}
+                            ></Select>
+                            <input disabled type="text" placeholder="Gửi đến họ tên của thầy/cô" id="teacherInput" required onChange={(e) => {
                                 this.setState({ teacher: e.target.value })
                             }}></input>
+
                         </div>
                         <div id="form-group-wish">
                             <textarea maxLength="250" placeholder="Điều bạn muốn gửi gắm đến thầy cô" required onChange={(e) => {
@@ -116,10 +150,9 @@ export default class FormToReg extends React.Component {
                 </div>
             )
         }
-        else
-        {
+        else {
             return (
-                <p>Thanks for submitting!</p>    
+                <p>Thanks for submitting!</p>
             )
         }
     }
