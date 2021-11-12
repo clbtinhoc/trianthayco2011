@@ -8,20 +8,24 @@ import {
 import FormToReg from "./Pages/form";
 import AllWishes from "./Pages/allWishes";
 import GetAWish from "./Pages/aWish";
+import Navbar from "./Pages/navbar";
+import Main from "./Pages/main";
+// The form is gonna be the main page lol
 function App() {
   return (
-    
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<FormToReg />} />
-          <Route path="/getwish">
-            <Route path=":teacher" element= {<AllWishes />} />
-            <Route path=":teacher/:index" element={<GetAWish />} />
-            
-          </Route>
-        </Routes>
-      </BrowserRouter>
-   
+
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" exact element={<Main />} />
+        <Route path="/new-wish" element={<FormToReg />} />
+        <Route path="/getwish">
+          <Route path=":teacher" element={<AllWishes />} />
+          <Route path=":teacher/:index" element={<GetAWish />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 

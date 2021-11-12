@@ -1,0 +1,304 @@
+.slogan {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.something {
+    margin-top: 2%;
+}
+
+#to {
+    font-size: 3em;
+    background: -webkit-linear-gradient(45deg, #414d0b, #727a17);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#communism {
+    font-size: 3em;
+    margin: 0;
+}
+
+/* .bs {
+    font-size: 4rem;
+    background-image: linear-gradient(to right, #673AB7, #009688, #E91E63, #009688, #642D91);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+} */
+
+.slogan .bruh2 {
+    font-size: 6em;
+    font-weight: bold;
+    background: -webkit-linear-gradient(45deg, #09009f 15%, #00ff95 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0;
+    padding: 0;
+    margin: 0
+}
+
+/* // 45deg, purple,#FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%) */
+
+.slogan .teacherthing {
+    background: -webkit-linear-gradient(45deg, #FA8BFF 45%, #2BD2FF 55%, #2BFF88 15%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 4rem;
+    margin: 0;
+    padding: 0;
+}
+
+.slogan .bs {
+    background: -webkit-linear-gradient(45deg, #FA8BFF 25%, #2BD2FF 50%, #2BFF88 25%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 4rem;
+    margin: 0;
+    padding: 0;
+}
+
+.slogan .something h2 {
+    padding: 0;
+    font-size: 6em;
+    background: -webkit-linear-gradient(45deg, yellow, orange, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0
+}
+
+.slogan .teacherthinglol {
+    padding: 0;
+    font-size: 6em;
+    background: -webkit-linear-gradient(45deg, yellow, orange, red);
+    color: red;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.main-page {
+    width: 90%;
+    margin: auto;
+}
+
+.buttons-to-redirect {
+    text-align: center;
+    display: flex;
+    /* padding-top: 2%; */
+    /* justify-content: center; */
+    margin: auto;
+    /* width: 50%; */
+    justify-content: center;
+}
+
+.buttons-to-redirect a {
+    text-decoration: none;
+    color: black;
+    /* color: #fff; */
+    /* background-color: #ff0000; */
+}
+
+.buttons-to-redirect button {
+    border: 0;
+}
+
+#button-1 a {
+    background-color: black;
+    color: white;
+    padding: 0.5vw;
+    border: black solid 1px;
+    border-radius: 8px;
+    transition: 0.5s ease;
+}
+
+#button-1 a:hover {
+    background-color: white;
+    color: black;
+    border: black solid 1px;
+    padding: 0.5vw;
+    border-radius: 8px;
+}
+
+#button-2 a {
+    background-color: white;
+    color: #a9a9a9;
+    padding: 0.5vw;
+    border: #eaeaea solid 1px;
+    border-radius: 8px;
+    transition: 0.5s ease;
+}
+
+#button-1 #button-2 {
+    width: 5vw;
+    height: 5vh;
+}
+
+#button-2 a:hover {
+    background-color: white;
+    color: black;
+    padding: 0.5vw;
+    border: black solid 1px;
+    border-radius: 8px;
+}
+
+.buttons-to-redirect div {
+    padding: 5%;
+}
+
+
+@media screen and (max-width: 445px) {
+    .slogan {
+        text-align: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .something {
+        margin-top: 2%;
+    }
+    
+    #to {
+        font-size: 2em;
+        background: -webkit-linear-gradient(45deg, #414d0b, #727a17);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    #communism {
+        font-size: 2em;
+        margin: 0;
+    }
+    
+    /* .bs {
+        font-size: 4rem;
+        background-image: linear-gradient(to right, #673AB7, #009688, #E91E63, #009688, #642D91);
+        background-clip: text;
+        -webkit-background-clip: text;
+        text-fill-color: transparent;
+        -webkit-text-fill-color: transparent;
+    } */
+    
+    .slogan .bruh2 {
+        font-size: 3em;
+        font-weight: bold;
+        background: -webkit-linear-gradient(45deg, #09009f 15%, #00ff95 70%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0;
+        padding: 0;
+        margin: 0
+    }
+    
+    /* // 45deg, purple,#FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%) */
+    
+    .slogan .teacherthing {
+        background: -webkit-linear-gradient(45deg, #FA8BFF 45%, #2BD2FF 55%, #2BFF88 15%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2rem;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .slogan .bs {
+        background: -webkit-linear-gradient(45deg, #FA8BFF 25%, #2BD2FF 50%, #2BFF88 25%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2rem;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .slogan .something h2 {
+        padding: 0;
+        font-size: 3em;
+        background: -webkit-linear-gradient(45deg, yellow, orange, red);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0
+    }
+    
+    .slogan .teacherthinglol {
+        padding: 0;
+        font-size: 3em;
+        background: -webkit-linear-gradient(45deg, yellow, orange, red);
+        color: red;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+    }
+    
+    .main-page {
+        width: 90%;
+        margin: auto;
+    }
+    
+    .buttons-to-redirect {
+        text-align: center;
+        display: flex;
+        /* padding-top: 2%; */
+        /* justify-content: center; */
+        margin: auto;
+        /* width: 50%; */
+        justify-content: center;
+    }
+    
+    .buttons-to-redirect a {
+        text-decoration: none;
+        color: black;
+        /* color: #fff; */
+        /* background-color: #ff0000; */
+    }
+    
+    .buttons-to-redirect button {
+        border: 0;
+    }
+    
+    #button-1 a {
+        background-color: black;
+        color: white;
+        padding: 0.5vw;
+        border: black solid 1px;
+        border-radius: 8px;
+        transition: 0.5s ease;
+    }
+    
+    #button-1 a:hover {
+        background-color: white;
+        color: black;
+        border: black solid 1px;
+        padding: 0.5vw;
+        border-radius: 8px;
+    }
+    
+    #button-2 a {
+        background-color: white;
+        color: #a9a9a9;
+        padding: 0.5vw;
+        border: #eaeaea solid 1px;
+        border-radius: 8px;
+        transition: 0.5s ease;
+    }
+    
+    #button-1 #button-2 {
+        width: 5vw;
+        height: 5vh;
+    }
+    
+    #button-2 a:hover {
+        background-color: white;
+        color: black;
+        padding: 0.5vw;
+        border: black solid 1px;
+        border-radius: 8px;
+    }
+    
+    .buttons-to-redirect div {
+        padding: 5%;
+    }
+}

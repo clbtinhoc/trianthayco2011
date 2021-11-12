@@ -1,0 +1,25 @@
+.navbar{
+    /* background-color: blue; */
+    width: 90%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* padding: 0px 20px;   */
+
+    margin: auto;
+}
+.navbar a{
+    text-decoration: none;
+    color: grey;
+    font-size:1.2rem;
+    transition: 0.5s ease;
+}
+.navbar a:hover{
+    color: black;
+}
+@media screen and (max-width: 335px){
+    .navbar{
+        font-size: 0.9rem;
+    }
+}
