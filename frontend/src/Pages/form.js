@@ -128,7 +128,7 @@ export default class FormToReg extends React.Component {
                             </div>
                             <Select value={this.state.teacher} options={teacherOptions} onChange={
                                 (selectedOption) => {
-                                    this.setState({ teacher: selectedOption })
+                                    this.setState({ teacher: selectedOption.value })
                                 }
                             }
                                 isDisabled={!this.state.differentTeacher}
