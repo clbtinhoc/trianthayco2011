@@ -110,8 +110,8 @@ export default class FormToReg extends React.Component {
                                     }}></input>
                                     <label for="anon-year">Ẩn năm</label>
                                 </span>
-                                <Select value={this.state.identityYear} onChange={(selectedOption) => {
-                                    this.setState({ identityYear: selectedOption });
+                                <Select value={{value : this.state.identityYear, label: this.state.identityYear}} onChange={(selectedOption) => {
+                                    this.setState({ identityYear: selectedOption.value });
                                 }} options={this.years} isDisabled={this.state.anonYear} />
                             </div>
 
@@ -126,7 +126,7 @@ export default class FormToReg extends React.Component {
 
 
                             </div>
-                            <Select value={this.state.teacher} options={teacherOptions} onChange={
+                            <Select value={{value : this.state.teacher, label: this.state.teacher}} options={teacherOptions} onChange={
                                 (selectedOption) => {
                                     this.setState({ teacher: selectedOption.value })
                                 }
