@@ -11,12 +11,12 @@
 }
 .navbar a{
     text-decoration: none;
-    color: grey;
+    color: white;
     font-size:1.2rem;
     transition: 0.5s ease;
 }
 .navbar a:hover{
-    color: black;
+    color: grey;
 }
 @media screen and (max-width: 335px){
     .navbar{

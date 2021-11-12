@@ -3,7 +3,9 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
+
 }
+
 
 .something {
     margin-top: 2%;
@@ -19,6 +21,7 @@
 #communism {
     font-size: 3em;
     margin: 0;
+    color: black;
 }
 
 /* .bs {
@@ -80,9 +83,15 @@
     margin: 0;
 }
 
-.main-page {
-    width: 90%;
-    margin: auto;
+body {
+    background: url("https://media3.giphy.com/media/pcN9RH7X2Ah7G/giphy.gif") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  
+    padding: 0;
+    margin: 0;
 }
 
 .buttons-to-redirect {
@@ -109,27 +118,29 @@
 #button-1 a {
     background-color: black;
     color: white;
-    padding: 0.5vw;
+    padding: 1vw;
     border: black solid 1px;
     border-radius: 8px;
     transition: 0.5s ease;
+    font-weight: bold;
 }
 
 #button-1 a:hover {
     background-color: white;
     color: black;
     border: black solid 1px;
-    padding: 0.5vw;
+    padding: 1vw;
     border-radius: 8px;
 }
 
 #button-2 a {
     background-color: white;
     color: #a9a9a9;
-    padding: 0.5vw;
+    padding: 1vw;
     border: #eaeaea solid 1px;
     border-radius: 8px;
     transition: 0.5s ease;
+    font-weight: bold;
 }
 
 #button-1 #button-2 {
@@ -140,7 +151,7 @@
 #button-2 a:hover {
     background-color: white;
     color: black;
-    padding: 0.5vw;
+    padding: 1vw;
     border: black solid 1px;
     border-radius: 8px;
 }
@@ -170,6 +181,7 @@
     }
     
     #communism {
+        color: white;
         font-size: 2em;
         margin: 0;
     }
@@ -234,7 +246,7 @@
     }
     
     .main-page {
-        width: 90%;
+        /* width: 90%; */
         margin: auto;
     }
     
