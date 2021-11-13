@@ -16,10 +16,7 @@ router.post('/add', (req, res) => {
     // }
     // Escape everything in the data
     const data = JSON.parse(JSON.stringify(req.body));
-    checkTeacherName(data.content.teacherName, () => {
-        add(data);
-
-    });
+    checkTeacherName(data.content.teacherName, data);
     res.send({
         status: 'success',
         message: 'Wish added'
@@ -30,16 +27,27 @@ router.post('/add', (req, res) => {
 
 // Check if teacher's name exists in Content firebase collection as a function with paramenter teacherName
 // }
-function checkTeacherName(teacherName, callback){
+function checkTeacherName(teacherName, data){
     // Check if teacher's name exists in Content firebase collection, document teacherName, if it exists then call the callback, if not, create one 
     // with data {wishes: []} then call the callback
     admin.firestore().collection('Content').doc(teacherName).get().then(doc => {
         if (!doc.exists){
             admin.firestore().collection('Content').doc(teacherName).set({
-                wishes: [],
+                wishes: [
+                    {
+                        identity: data.identity,
+                        wish: data.content.wish
+                    }
+                ],
             })
         }
-        callback()
+        else
+        {
+            admin.firestore().collection('Content').doc(data.content.teacherName).update({
+                wishes: admin.firestore.FieldValue.arrayUnion()
+            })
+        }
+
     }
     )
 
