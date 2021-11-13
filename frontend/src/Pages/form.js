@@ -29,7 +29,7 @@ export default class FormToReg extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        fetch("http://localhost:5001/tri-an-2011/us-central1/api/getTeacherNames")
+        fetch("https://asia-east2-tri-an-2011.cloudfunctions.net/api/getTeacherNames")
             .then(res => res.json())
             .then(data => {
                 this.setState({
@@ -41,7 +41,7 @@ export default class FormToReg extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.setState({ submit: true });
-        fetch("http://localhost:5001/tri-an-2011/us-central1/api/add", {
+        fetch("https://asia-east2-tri-an-2011.cloudfunctions.net/api/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -145,6 +145,9 @@ export default class FormToReg extends React.Component {
                                 
                                     this.setState({ anonName: !this.state.anonName });
                                     document.getElementById("nameInput").disabled = !this.state.anonName;
+                                    if(!this.state.anonName){
+                                        document.getElementById("nameInput").value = ""
+                                    }
                                 }} />
                                 <p>Hide name</p>
                             </div>
@@ -163,6 +166,8 @@ export default class FormToReg extends React.Component {
                                             identityYear: "",
                                             identityClass: ""
                                         })
+                                        document.getElementById("nameInput").value = ""
+                                        document.getElementById("classInput").value = ""
                                     }
                                     else {
                                         this.setState({ identityYear: "Select your school year" })
