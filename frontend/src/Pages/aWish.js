@@ -1,5 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import "./Stylesheets/aWish.css"
+import { BsLink45Deg } from "react-icons/bs";
 class Renderer extends React.Component {
     constructor(props) {
         super(props);
@@ -22,13 +24,15 @@ class Renderer extends React.Component {
     render() {
         let data = this.state.wish
         let Rendered;
+        let teacherName = this.props.params.teacher
+        let index = this.props.params.index
         if (data != null) {
             let preview = JSON.stringify(data.wish)
             let wish = {
                 author: "Bạn " + JSON.stringify(data.identity.name),
                 class: "Lớp " + JSON.stringify(data.identity.class),
                 year: "Năm học " + JSON.stringify(data.identity.year),
-                preview: JSON.stringify(data.wish),
+                preview: JSON.stringify(data.wish).substring(1, data.wish.length - 1),
             }
             console.log(data.identity.name === null)
             if (data.identity.name === null || data.identity.name === "") {
@@ -43,19 +47,38 @@ class Renderer extends React.Component {
             let message;
             // Set message to <p>Một bạn ẩn danh</p> if every property in wish is null
             if (wish.author === "" && wish.class === "" && wish.year === "") {
-                message = "Bạn ẩn danh"
+                message = "Anonymous"
             }
             else {
                 message = `${wish.author} ${wish.class} ${wish.year}`
             }
             Rendered = function () {
                 return (
-                    <div className="wish-container">
-                        <div className="wish-header">
-                            <p>Lời chúc này đến từ {message}</p>
+                    <div>
+                        <div className="wish-container">
+                            <div className="wish-header">
+                                <p>This wish is from {message} </p>
+                            </div>
+                            <div className="wish-body">
+                                <p>{preview}</p>
+                            </div>
                         </div>
-                        <div className="wish-body">
-                            <p>{preview}</p>
+                        <div className="controls">
+                            Share to your friends or your teacher!
+                            <div className="copyLink" onClick={()=>{
+                                  var copyText = document.getElementById("link");
+
+                                  /* Select the text field */
+                                  copyText.select();
+                                  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+                                
+                                   /* Copy the text inside the text field */
+                                  navigator.clipboard.writeText(copyText.value);
+                                  alert("Copied!")
+                            }}>
+                                <BsLink45Deg /> Copy link
+                            </div>
+                            <input hidden id="link" value={`http://localhost:3000/wish/${teacherName}/${index}`} />
                         </div>
                     </div>
                 )
@@ -63,7 +86,7 @@ class Renderer extends React.Component {
         }
         else {
             Rendered = function () {
-                return (<p>Lời chúc này hiện không có</p>)
+                return (<p>This wish doesn't exist</p>)
             }
         }
         return (

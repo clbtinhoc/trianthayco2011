@@ -29,7 +29,7 @@ export default class FormToReg extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        fetch("http://localhost:5001/tri-an-2011/us-central1/api//getTeacherNames")
+        fetch("http://localhost:5001/tri-an-2011/us-central1/api/getTeacherNames")
             .then(res => res.json())
             .then(data => {
                 this.setState({

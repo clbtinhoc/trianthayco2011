@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Stylesheets/allWishes.css"
 import { useParams } from 'react-router-dom';
 class RenderWish extends React.Component {
     constructor(props) {
@@ -35,12 +36,11 @@ class RenderWish extends React.Component {
             // let preview = JSON.stringify(data.content.wish).substring(0, 20)
             // let preview = JSON.stringify(data.wish) 
             let wish = {
-                author: "Bạn " + JSON.stringify(data.identity.name),
-                class: "Lớp " + JSON.stringify(data.identity.class),
-                year: "Năm học là " + JSON.stringify(data.identity.year),
+                author: JSON.stringify(data.identity.name).substring(1, JSON.stringify(data.identity.name).length - 1),
+                class: "class " + JSON.stringify(data.identity.class).substring(1, JSON.stringify(data.identity.class).length - 1),
+                year: "joined the school in year " + JSON.stringify(data.identity.year).substring(1, JSON.stringify(data.identity.year).length - 1),
                 preview: JSON.stringify(data.wish).substring(1, data.wish.length - 1).slice(0, 20) + "...",
             }
-            console.log(data.identity.name === null)
             if (data.identity.name === null || data.identity.name === "") {
                 wish.author = ""
             }
@@ -50,23 +50,29 @@ class RenderWish extends React.Component {
             if (data.identity.year === null || data.identity.year === "") {
                 wish.year = ""
             }
-            let message = "một bạn"
+            let message;
             // Set message to <p>Một bạn ẩn danh</p> if every property in wish is null
             if (wish.author === "" && wish.class === "" && wish.year === "") {
-                message += " ẩn danh"
+                message = " anonymous"
             }
             else {
-                message += `${wish.author} ${wish.class} ${wish.year}`
+                message = `${wish.author} ${wish.class} ${wish.year}`
             }
 
             return (
-                <div className="wish" key={index}>
+                <div className="wish" key={index} onClick={
+                    ()=>{
+                        window.location=`/getwish/${this.state.teacherName}/${index}`
+                    }
+                }>
                     <div className="wish-content">
                         <div className="preview">
-                            {wish.preview}
+                            "{wish.preview}"
                         </div>
+                        <br />
+                        
                         <div className="from">
-                            Lời chúc của {message}
+                            From {message}
                         </div>
                     </div>
                 </div>
@@ -75,8 +81,8 @@ class RenderWish extends React.Component {
 
         if (this.state.ok) {
             return (
-                <div>
-                    <h4>Đang thể hiện lời chúc cho thầy/cô {this.state.teacherName}</h4>
+                <div style={{width:"70%", margin:"auto"}}>
+                    <h3 style={{textAlign:"center", color:"white"}}>Display wishes for {this.state.teacherName}</h3>
                     <div className="wishes">
                         {wishes}
                     </div>

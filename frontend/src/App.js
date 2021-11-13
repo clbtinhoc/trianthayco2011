@@ -10,6 +10,7 @@ import AllWishes from "./Pages/allWishes";
 import GetAWish from "./Pages/aWish";
 import Navbar from "./Pages/navbar";
 import Main from "./Pages/main";
+import StartGetwish from "./Pages/find-wishes";
 // The form is gonna be the main page lol
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path=":teacher" element={<AllWishes />} />
           <Route path=":teacher/:index" element={<GetAWish />} />
         </Route>
+        <Route path="/start-getwish" element={<StartGetwish />}/>
       </Routes>
     </BrowserRouter>
 

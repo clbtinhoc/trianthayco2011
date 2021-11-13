@@ -1,0 +1,29 @@
+.wish{
+    background-color: whitesmoke;
+    padding: 2vw;
+    border-radius: 3px;
+    width: auto;
+    height: auto;
+    margin: 1vw;
+    word-wrap: normal;
+}
+.wishes{
+    display: flex;
+    /* flex-wrap: wrap; */
+}
+
+@media screen and (max-width: 445px) {
+    .wish{
+        background-color: whitesmoke;
+        padding: 1vw;
+        border-radius: 3px;
+        width: auto;
+        height: auto;
+    }
+    .wishes{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    
+}

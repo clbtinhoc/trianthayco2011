@@ -1,0 +1,23 @@
+.wish-container{
+    font-size: 1.2em;
+    width: 20vw;;
+    word-wrap: normal;
+    margin: auto;
+    background-color: white;
+    padding: 1vw;
+    border-radius: 3px;
+}
+.controls{
+    background-color: white;
+    width: 20vw;
+    margin:auto;
+    padding: 1vw;
+    margin-top: 2%;
+    border-radius: 3px;
+}
+@media screen and (max-width: 445px) {
+    .wish-container{
+        width: 100%
+    }
+
+}
