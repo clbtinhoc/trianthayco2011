@@ -44,7 +44,10 @@ function checkTeacherName(teacherName, data){
         else
         {
             admin.firestore().collection('Content').doc(data.content.teacherName).update({
-                wishes: admin.firestore.FieldValue.arrayUnion()
+                wishes: admin.firestore.FieldValue.arrayUnion({
+                    identity: data.identity,
+                    wish: data.content.wish
+                })
             })
         }
 
