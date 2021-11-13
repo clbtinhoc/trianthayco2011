@@ -33,26 +33,26 @@ class RenderWish extends React.Component {
         // }
         let wishes = this.state.wishes.map((data, index) => {
             // let preview = JSON.stringify(data.content.wish).substring(0, 20)
-            let preview = JSON.stringify(data.wish) 
+            // let preview = JSON.stringify(data.wish) 
             let wish = {
                 author: "Bạn " + JSON.stringify(data.identity.name),
                 class: "Lớp " + JSON.stringify(data.identity.class),
                 year: "Năm học là " + JSON.stringify(data.identity.year),
                 preview: JSON.stringify(data.wish).substring(1, data.wish.length - 1).slice(0, 20) + "...",
             }
-            console.log(data.identity.name == null)
-            if (data.identity.name == null || data.identity.name == "") {
+            console.log(data.identity.name === null)
+            if (data.identity.name === null || data.identity.name === "") {
                 wish.author = ""
             }
-            if (data.identity.class == null || data.identity.class == "") {
+            if (data.identity.class === null || data.identity.class === "") {
                 wish.class = ""
             }
-            if (data.identity.year == null || data.identity.year == "") {
+            if (data.identity.year === null || data.identity.year === "") {
                 wish.year = ""
             }
             let message = "một bạn"
             // Set message to <p>Một bạn ẩn danh</p> if every property in wish is null
-            if (wish.author == "" && wish.class == "" && wish.year == "") {
+            if (wish.author === "" && wish.class === "" && wish.year === "") {
                 message += " ẩn danh"
             }
             else {

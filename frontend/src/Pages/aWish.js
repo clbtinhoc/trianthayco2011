@@ -30,19 +30,19 @@ class Renderer extends React.Component {
                 year: "Năm học " + JSON.stringify(data.identity.year),
                 preview: JSON.stringify(data.wish),
             }
-            console.log(data.identity.name == null)
-            if (data.identity.name == null || data.identity.name == "") {
+            console.log(data.identity.name === null)
+            if (data.identity.name === null || data.identity.name === "") {
                 wish.author = ""
             }
-            if (data.identity.class == null || data.identity.class == "") {
+            if (data.identity.class === null || data.identity.class === "") {
                 wish.class = ""
             }
-            if (data.identity.year == null || data.identity.year == "") {
+            if (data.identity.year === null || data.identity.year === "") {
                 wish.year = ""
             }
             let message;
             // Set message to <p>Một bạn ẩn danh</p> if every property in wish is null
-            if (wish.author == "" && wish.class == "" && wish.year == "") {
+            if (wish.author === "" && wish.class === "" && wish.year === "") {
                 message = "Bạn ẩn danh"
             }
             else {

@@ -1,6 +1,5 @@
 import React from "react"
 import "./Stylesheets/form.css"
-import formBg from "../Assets/form_background.png"
 
 import Select from 'react-select';
 
@@ -10,8 +9,8 @@ export default class FormToReg extends React.Component {
         this.state = {
             identityName: null,
             identityClass: null,
-            identityYear: null,
-            teacher: null,
+            identityYear: "Select your school year",
+            teacher: "Select a teacher",
             anonName: false,
             anonClass: false,
             anonYear: false,
@@ -79,80 +78,113 @@ export default class FormToReg extends React.Component {
                     <form onSubmit={this.handleSubmit}>
 
                         <div id="form-group-name">
-                            <div className="checkBox-anon">
-                                <input type="checkbox" id="anon-name" onChange={(e) => {
-                                    this.setState({ anonName: !this.state.anonName });
-                                    document.getElementById("nameInput").disabled = !this.state.anonName;
-                                }}></input>
-                                <label for="anon-name">Ẩn danh</label>
-                            </div>
-                            <input type="text" placeholder="Họ và tên" id="nameInput" onChange={(e) => {
+
+                            <input type="text" placeholder="Full name" id="nameInput" value={this.state.identityName} required onChange={(e) => {
                                 this.setState({ identityName: e.target.value })
                             }}></input>
                         </div>
                         <div id="form-group-2">
+
                             <div id="form-group-class">
-                                <div className="checkBox-anon">
-                                    <input type="checkbox" id="anon-class" onChange={(e) => {
-                                        this.setState({ anonClass: !this.state.anonClass });
-                                        document.getElementById("classInput").disabled = !this.state.anonClass;
-                                    }}></input>
-                                    <label for="anon-class">Ẩn lớp</label>
-                                </div>
-                                <input type="text" placeholder="Lớp" id="classInput" onChange={(e) => {
+
+                                <input type="text" placeholder="Class" id="classInput" value={this.state.identityClass} required onChange={(e) => {
                                     this.setState({ identityClass: e.target.value })
                                 }}></input>
                             </div>
                             <div id="form-group-year">
-                                <span className="checkBox-anon">
-                                    <input type="checkbox" id="anon-year" onChange={(e) => {
-                                        this.setState({ anonYear: !this.state.anonYear });
-                                    }}></input>
-                                    <label for="anon-year">Ẩn năm</label>
-                                </span>
-                                <Select value={{value : this.state.identityYear, label: this.state.identityYear}} onChange={(selectedOption) => {
-                                    this.setState({ identityYear: selectedOption.value });
-                                }} options={this.years} isDisabled={this.state.anonYear} />
+
+                                <div className="select-year selectorlmao">
+                                    <div>
+                                        <Select value={{ value: this.state.identityYear, label: this.state.identityYear }} onChange={(selectedOption) => {
+                                            this.setState({ identityYear: selectedOption.value });
+                                        }} options={this.years} isDisabled={this.state.anonYear} placeholder="School year" />
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
                         <div id="form-group-teacher">
                             <div className="checkBox-anon">
-                                <input type="checkbox" id="anon-teacher" onChange={(e) => {
-                                    this.setState({ differentTeacher: !this.state.differentTeacher });
-                                    document.getElementById("teacherInput").disabled = !this.state.differentTeacher;
-                                }}></input>
-                                <label for="anon-teacher">Thầy/cô khác</label>
-
-
+                            <span>Teacher is not on the list</span>
+                            
+                                    <input type="checkbox" id="anon-teacher" onChange={(e) => {
+                                        this.setState({ differentTeacher: !this.state.differentTeacher });
+                                        document.getElementById("teacherInput").disabled = !this.state.differentTeacher;
+                                    }}></input>
+                            
                             </div>
-                            <Select value={{value : this.state.teacher, label: this.state.teacher}} options={teacherOptions} onChange={
-                                (selectedOption) => {
-                                    this.setState({ teacher: selectedOption.value })
+                            <div className="selectorlmao">
+                                <Select value={{ value: this.state.teacher, label: this.state.teacher }} options={teacherOptions} onChange={
+                                    (selectedOption) => {
+                                        this.setState({ teacher: selectedOption.value })
+                                    }
                                 }
-                            }
-                                isDisabled={!this.state.differentTeacher}
-                            ></Select>
-                            <input disabled type="text" placeholder="Gửi đến họ tên của thầy/cô" id="teacherInput" required onChange={(e) => {
-                                this.setState({ teacher: e.target.value })
-                            }}></input>
+                                    placeholder="Teacher's name"
+                                    isDisabled={!this.state.differentTeacher}
+                                ></Select>
+                            </div>
+
 
                         </div>
+                        <input autoComplete="off" disabled type="text" placeholder="Teacher full name" id="teacherInput" required onChange={(e) => {
+                            this.setState({ teacher: e.target.value })
+                        }}></input>
                         <div id="form-group-wish">
-                            <textarea maxLength="250" placeholder="Điều bạn muốn gửi gắm đến thầy cô" required onChange={(e) => {
+                            <textarea maxLength="250" placeholder="Write what you want to send to teacher..." required onChange={(e) => {
                                 this.setState({ wish: e.target.value })
                             }}>
 
                             </textarea>
                         </div>
-                        <button type="submit">Gửi đi</button>
+
+                        <div className="anon-check">
+                            <p>Do you want to</p>
+
+                            <div>
+                                <input type="checkbox" onChange={(e) => {
+                                
+                                    this.setState({ anonName: !this.state.anonName });
+                                    document.getElementById("nameInput").disabled = !this.state.anonName;
+                                }} />
+                                <p>Hide name</p>
+                            </div>
+                            <div>
+                                <input type="checkbox" onChange={(e) => {
+
+                                    if (!this.state.anonName) {
+                                        this.setState({ anonName: !this.state.anonName }); // Name
+                                        document.getElementById("nameInput").disabled = !this.state.anonName;
+                                    }
+                                    this.setState({ anonYear: !this.state.anonYear });
+                                    this.setState({ anonClass: !this.state.anonClass });
+                                    if (!this.state.anonName) {
+                                        this.setState({
+                                            identityName: "",
+                                            identityYear: "",
+                                            identityClass: ""
+                                        })
+                                    }
+                                    else {
+                                        this.setState({ identityYear: "Select your school year" })
+                                    }
+                                    document.getElementById("classInput").disabled = !this.state.anonClass;
+
+
+                                }} />
+                                <p>Hide all</p>
+                            </div>
+
+                        </div>
+                        <button type="submit">Send</button>
                     </form>
                 </div>
             )
         }
         else {
             return (
-                <p>Thanks for submitting!</p>
+                <div id="form">
+                    <h1>Thanks for submitting</h1>
+                </div>
             )
         }
     }
