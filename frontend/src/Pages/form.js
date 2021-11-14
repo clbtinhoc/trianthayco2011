@@ -10,8 +10,8 @@ export default class FormToReg extends React.Component {
         this.state = {
             identityName: null,
             identityClass: null,
-            identityYear: "Select your school year",
-            teacher: "Select a teacher",
+            identityYear: "",
+            teacher: "",
             anonName: false,
             anonClass: false,
             anonYear: false,
