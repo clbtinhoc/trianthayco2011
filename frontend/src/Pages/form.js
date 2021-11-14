@@ -118,7 +118,7 @@ export default class FormToReg extends React.Component {
                         </Form.Group>
                         <Form.Group controlId="formBasicWish">
                             <Form.Label>Wish</Form.Label>
-                            <Form.Control as="textarea" rows="3" onChange={
+                            <Form.Control as="textarea" rows="3"  required onChange={
                                 (e) => { this.setState({ wish: e.target.value }) }}
                             />
                         </Form.Group>
