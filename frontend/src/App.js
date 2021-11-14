@@ -4,6 +4,7 @@ import {
   Route
 } from "react-router-dom";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import FormToReg from "./Pages/form";
 import AllWishes from "./Pages/allWishes";
