@@ -1,6 +1,8 @@
 import React from 'react';
 import "./Stylesheets/allWishes.css"
 import { useParams } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 class RenderWish extends React.Component {
     constructor(props) {
         super(props);
@@ -59,23 +61,41 @@ class RenderWish extends React.Component {
                 message = `${wish.author} ${wish.class} ${wish.year}`
             }
 
-            return (
-                <div className="wish" key={index} onClick={
-                    ()=>{
-                        window.location=`/getwish/${this.state.teacherName}/${index}`
-                    }
-                }>
-                    <div className="wish-content">
-                        <div className="preview">
-                            "{wish.preview}"
-                        </div>
-                        <br />
+            // return (
+            //     <div className="wish" key={index} onClick={
+            //         ()=>{
+            //             window.location=`/getwish/${this.state.teacherName}/${index}`
+            //         }
+            //     }>
+            //         <div className="wish-content">
+            //             <div className="preview">
+            //                 "{wish.preview}"
+            //             </div>
+            //             <br />
                         
-                        <div className="from">
+            //             <div className="from">
+            //                 From {message}
+            //             </div>
+            //         </div>
+            //     </div>
+            // )
+            return(
+                <Card style={{width:'18rem', marginLeft: "2%"}}>
+                    <Card.Body>
+                        <Card.Title>{wish.preview}</Card.Title>
+                        <Card.Text>
                             From {message}
-                        </div>
-                    </div>
-                </div>
+                        </Card.Text>
+                        <Button variant="primary" onClick={
+                            ()=>{
+                                window.location=`/getwish/${this.state.teacherName}/${index}`
+                            }
+                        }>
+                            View
+                        </Button>
+
+                    </Card.Body>
+                </Card>
             )
         })
 
