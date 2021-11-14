@@ -75,14 +75,14 @@ export default class FormToReg extends React.Component {
                     <Form onSubmit={this.handleSubmit} className="form">
                         <Form.Group controlId="formBasicName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter name" disabled={this.state.anonName}
+                            <Form.Control type="text" placeholder="Enter name" required disabled={this.state.anonName}
                                 onChange={
                                     (e) => { this.setState({ identityName: e.target.value }) }}
                             />
                         </Form.Group>
                         <Form.Group controlId="formBasicClass">
                             <Form.Label>Class</Form.Label>
-                            <Form.Control type="text" placeholder="Enter class" onChange={
+                            <Form.Control type="text" placeholder="Enter class" required onChange={
                                 (e) => { this.setState({ identityClass: e.target.value }) }}
                                 disabled={this.state.anonClass}
                             />
@@ -90,6 +90,7 @@ export default class FormToReg extends React.Component {
                         <Form.Group controlId="formBasicYear">
                             <Form.Label>Year</Form.Label>
                             <Select
+                                isSearchable={true}
                                 isDisabled={this.state.anonYear}
                                 options={this.years}
                                 onChange={(e) => { this.setState({ identityYear: e.value }) }}
