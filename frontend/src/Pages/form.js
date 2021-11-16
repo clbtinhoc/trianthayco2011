@@ -19,6 +19,8 @@ export default class FormToReg extends React.Component {
             submit: false,
             existingTeachers: [],
             differentTeacher: false, // Actually true at first for the disabled thing lmao
+            errorMsg: null,
+            errorTimeout: null,
         }
         this.years = [{ value: "2016-2017", label: "2016-2017" },
         { value: "2017-2018", label: "2017-2018" },
@@ -41,7 +43,7 @@ export default class FormToReg extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({ submit: true });
+        clearInterval(this.state.errorTimeout)
         fetch("http://localhost:5001/tri-an-2011/us-central1/api/add", {
             method: "POST",
             headers: {
@@ -60,7 +62,12 @@ export default class FormToReg extends React.Component {
             })
         }).then(res => res.json())
             .then(text => {
-                console.log(text)
+                console.log('success:', text)
+                this.setState({ submit: true });
+            })
+            .catch(error =>{
+                this.setState({errorMsg: error.message, errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
+                console.log('error: ', error)
             })
     }
     render() {
@@ -126,7 +133,7 @@ export default class FormToReg extends React.Component {
                             <Form.Check type="checkbox" label="Hide my name" onChange={
                                 (e) => {
                                     this.setState({ anonName: e.target.checked })
-                                    if (e.target.checked === true) {
+                                    if (e.target.checked) {
                                         this.setState({ identityName: "" })
                                     }
                                 }}
@@ -135,7 +142,7 @@ export default class FormToReg extends React.Component {
                             <Form.Check type="checkbox" label="Hide my class" onChange={
                                 (e) => {
                                     this.setState({ anonClass: e.target.checked })
-                                    if (e.target.checked === true) {
+                                    if (e.target.checked) {
                                         this.setState({ identityClass: "" })
                                     }
 
@@ -145,7 +152,7 @@ export default class FormToReg extends React.Component {
                             <Form.Check type="checkbox" label="Hide my school year" onChange={
                                 (e) => {
                                     this.setState({ anonYear: e.target.checked })
-                                    if (e.target.checked === true) {
+                                    if (e.target.checked) {
                                         this.setState({ identityYear: "" })
                                     }
                                 }}
@@ -154,13 +161,13 @@ export default class FormToReg extends React.Component {
 
                         </Form.Group>
                         <div style={{width:"fit-content", margin:"auto"}}>
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
                         </div>
                     </Form>
-
-
+                    
+                    <WarningPopup warn={this.state.errorMsg} />
                 </div>
             )
         }
@@ -172,5 +179,23 @@ export default class FormToReg extends React.Component {
             )
         }
     }
+}
 
+class WarningPopup extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    render(){
+        if(!this.props.warn){
+            console.log('nothing happen');
+            return null;
+        }
+        console.log('something happen');
+
+        return(
+            <h1 className="Warning">
+                {this.props.warn}
+            </h1>
+        )
+    }
 }
