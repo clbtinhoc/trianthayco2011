@@ -14,7 +14,7 @@ class RenderWish extends React.Component {
         }
     }
     componentDidMount() {
-        fetch(`https://asia-east2-tri-an-2011.cloudfunctions.net/api/getWishes/${this.state.teacherName}`)
+        fetch(`http://localhost:5001/tri-an-2011/asia-east2/apigetWishes/${this.state.teacherName}`)
             .then(res => res.json())
             .then(data => {
                 this.setState({ wishes: data });
