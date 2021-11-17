@@ -12,7 +12,7 @@ class Renderer extends React.Component {
         }
     }
     componentDidMount() {
-        fetch(`http://localhost:5001/tri-an-2011/us-central1/api/getWishes/${this.props.params.teacher}/${this.props.params.index}`)
+        fetch(`https://asia-east2-tri-an-2011.cloudfunctions.net/api/getWishes/${this.props.params.teacher}/${this.props.params.index}`)
             .then(res => res.json())
             .then(data => {
 
@@ -110,7 +110,7 @@ class Renderer extends React.Component {
                                 <BsLink45Deg /> Copy link
 
                             </div>
-                            <input type="text" value={`http://localhost:3000/getwish/${teacherName}/${index}`} hidden id="link" />
+                            <input hidden id="link" value={`https://tri-an-2011.web.app/getwish/${teacherName}/${index}`} />
                         </div>
                     </div>
                 )

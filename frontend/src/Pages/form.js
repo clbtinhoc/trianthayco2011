@@ -8,14 +8,15 @@ import Button from 'react-bootstrap/Button';
 
 import WarningPopup from "./warningPopup";
 
+import Alert from 'react-bootstrap/Alert';
 export default class FormToReg extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             identityName: null,
             identityClass: null,
-            identityYear: "Select your school year",
-            teacher: "Select a teacher",
+            identityYear: "",
+            teacher: "",
             anonName: false,
             anonClass: false,
             anonYear: false,
@@ -40,7 +41,7 @@ export default class FormToReg extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:5001/tri-an-2011/us-central1/api/getTeacherNames")
+        fetch("https://asia-east2-tri-an-2011.cloudfunctions.net/api/getTeacherNames")
             .then(res => res.json())
             .then(data => {
                 this.setState({
@@ -57,7 +58,7 @@ export default class FormToReg extends React.Component {
         e.preventDefault();
         clearInterval(this.state.errorTimeout)
         this.setState({loading: true})
-        fetch("http://localhost:5001/tri-an-2011/us-central1/api/add", {
+        fetch("https://asia-east2-tri-an-2011.cloudfunctions.net/api/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -250,5 +251,12 @@ class LoadingScreen extends React.Component {
         } else {
             return (null)
         }
+        return(
+            <div className="warning-popup" style={{width:"50%", margin:"auto", textAlign:"center"}}>
+                <Alert variant="danger">
+                    {this.props.warn}
+                </Alert>
+            </div>
+        )
     }
 }

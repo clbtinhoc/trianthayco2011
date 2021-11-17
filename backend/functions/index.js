@@ -23,4 +23,4 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-exports.api = functions.https.onRequest(app);
+exports.api = functions.region('asia-east2').https.onRequest(app);
