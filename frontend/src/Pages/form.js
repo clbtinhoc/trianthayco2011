@@ -252,6 +252,7 @@ export default class FormToReg extends React.Component {
                                 <button onClick={this.debugLoadingScreen} >Test loading screen</button>
                                 <button onClick={this.debugInfo}>Fill in demo info</button>
                                 <button onClick={this.resetInfo}>reset info</button>
+                                <button onClick={() => this.setState({submit: true})}>After submit page</button>
                             </div>
                         ): ("")}
                     </div>
@@ -261,6 +262,7 @@ export default class FormToReg extends React.Component {
                 return (
                     <div id="form">
                         <h1>Thanks for submitting</h1>
+                        <Button onClick={() => this.setState({submit: false})}>Quay lại</Button>
                     </div>
                 )
             }
@@ -315,7 +317,7 @@ class WarningPopup extends React.Component {
         return(
             <div className="warning-popup" style={{width:"50%", margin:"auto", textAlign:"center", position: "absolute", top: 0}}>
                 <Alert variant="danger">
-                    {this.props.warn}
+                    Lỗi: {this.props.warn}
                 </Alert>
             </div>
         )
