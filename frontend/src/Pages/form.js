@@ -4,6 +4,7 @@ import "./Stylesheets/form.css"
 import Select from 'react-select';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 export default class FormToReg extends React.Component {
     constructor(props) {
         super(props);
@@ -79,6 +80,8 @@ export default class FormToReg extends React.Component {
         if (!this.state.submit) {
             return (
                 <div id="form">
+                    <WarningPopup warn={this.state.errorMsg} />
+                    
                     <Form onSubmit={this.handleSubmit} className="form">
                         <Form.Group controlId="formBasicName">
                             <Form.Label>Name</Form.Label>
@@ -167,7 +170,7 @@ export default class FormToReg extends React.Component {
                         </div>
                     </Form>
                     
-                    <WarningPopup warn={this.state.errorMsg} />
+                    
                 </div>
             )
         }
@@ -193,9 +196,11 @@ class WarningPopup extends React.Component {
         console.log('something happen');
 
         return(
-            <h1 className="Warning">
-                {this.props.warn}
-            </h1>
+            <div className="warning-popup" style={{width:"50%", margin:"auto", textAlign:"center"}}>
+                <Alert variant="danger">
+                    {this.props.warn}
+                </Alert>
+            </div>
         )
     }
 }
