@@ -2,8 +2,9 @@ import React from "react"
 import "./Stylesheets/form.css"
 
 import Select from 'react-select';
-import Form from "react-bootstrap/Form"
-import Button from "react-bootstrap/Button"
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 export default class FormToReg extends React.Component {
     constructor(props) {
         super(props);
@@ -19,6 +20,8 @@ export default class FormToReg extends React.Component {
             submit: false,
             existingTeachers: [],
             differentTeacher: false, // Actually true at first for the disabled thing lmao
+            errorMsg: null,
+            errorTimeout: null,
         }
         this.years = [{ value: "2016-2017", label: "2016-2017" },
         { value: "2017-2018", label: "2017-2018" },
@@ -41,7 +44,7 @@ export default class FormToReg extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({ submit: true });
+        clearInterval(this.state.errorTimeout)
         fetch("https://asia-east2-tri-an-2011.cloudfunctions.net/api/add", {
             method: "POST",
             headers: {
@@ -60,7 +63,12 @@ export default class FormToReg extends React.Component {
             })
         }).then(res => res.json())
             .then(text => {
-                console.log(text)
+                console.log('success:', text)
+                this.setState({ submit: true });
+            })
+            .catch(error =>{
+                this.setState({errorMsg: error.message, errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
+                console.log('error: ', error)
             })
     }
     render() {
@@ -72,6 +80,8 @@ export default class FormToReg extends React.Component {
         if (!this.state.submit) {
             return (
                 <div id="form">
+                    <WarningPopup warn={this.state.errorMsg} />
+                    
                     <Form onSubmit={this.handleSubmit} className="form">
                         <Form.Group controlId="formBasicName">
                             <Form.Label>Name</Form.Label>
@@ -126,7 +136,7 @@ export default class FormToReg extends React.Component {
                             <Form.Check type="checkbox" label="Hide my name" onChange={
                                 (e) => {
                                     this.setState({ anonName: e.target.checked })
-                                    if (e.target.checked === true) {
+                                    if (e.target.checked) {
                                         this.setState({ identityName: "" })
                                     }
                                 }}
@@ -135,7 +145,7 @@ export default class FormToReg extends React.Component {
                             <Form.Check type="checkbox" label="Hide my class" onChange={
                                 (e) => {
                                     this.setState({ anonClass: e.target.checked })
-                                    if (e.target.checked === true) {
+                                    if (e.target.checked) {
                                         this.setState({ identityClass: "" })
                                     }
 
@@ -145,7 +155,7 @@ export default class FormToReg extends React.Component {
                             <Form.Check type="checkbox" label="Hide my school year" onChange={
                                 (e) => {
                                     this.setState({ anonYear: e.target.checked })
-                                    if (e.target.checked === true) {
+                                    if (e.target.checked) {
                                         this.setState({ identityYear: "" })
                                     }
                                 }}
@@ -154,13 +164,13 @@ export default class FormToReg extends React.Component {
 
                         </Form.Group>
                         <div style={{width:"fit-content", margin:"auto"}}>
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
                         </div>
                     </Form>
-
-
+                    
+                    
                 </div>
             )
         }
@@ -172,5 +182,25 @@ export default class FormToReg extends React.Component {
             )
         }
     }
+}
 
+class WarningPopup extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    render(){
+        if(!this.props.warn){
+            console.log('nothing happen');
+            return null;
+        }
+        console.log('something happen');
+
+        return(
+            <div className="warning-popup" style={{width:"50%", margin:"auto", textAlign:"center"}}>
+                <Alert variant="danger">
+                    {this.props.warn}
+                </Alert>
+            </div>
+        )
+    }
 }
