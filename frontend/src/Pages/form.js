@@ -6,8 +6,6 @@ import Select from 'react-select';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import WarningPopup from "./warningPopup";
-
 import Alert from 'react-bootstrap/Alert';
 export default class FormToReg extends React.Component {
     constructor(props) {
@@ -29,6 +27,7 @@ export default class FormToReg extends React.Component {
             loading: false,
             errorMsg: null,     
             errorTimeout: null,
+            debug: true, //REMEMBER TO SET TO FALSE FOR PRODUCTION
         }
         this.years = [{ value: "2016-2017", label: "2016-2017" },
         { value: "2017-2018", label: "2017-2018" },
@@ -38,6 +37,10 @@ export default class FormToReg extends React.Component {
         { value: "2021-2022", label: "2021-2022" },
         ]
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.debugError = this.debugError.bind(this);
+        this.debugLoadingScreen = this.debugLoadingScreen.bind(this);
+        this.debugInfo = this.debugInfo.bind(this);
+        this.resetInfo = this.resetInfo.bind(this);
     }
 
     componentDidMount() {
@@ -90,6 +93,49 @@ export default class FormToReg extends React.Component {
         console.log(errorInfo)
       }
 
+    debugLoadingScreen(){
+        console.log('debugLoadingScreen')
+        this.setState({loading: true});
+        setTimeout(() => this.setState({loading: false}), 3000)
+    }
+
+    debugError(){
+        console.log('debugError')
+        clearInterval(this.state.errorTimeout)
+        this.setState({errorMsg: "test", errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
+    }
+
+    debugInfo(){
+        console.log("debugInfo")
+        this.setState(
+            {
+                identityName: 'Nguyễn Văn A',
+                identityClass: '11A1',
+                identityYear: "2017-2018",
+                teacher: "Trần Thị B",
+                anonName: false,
+                anonClass: false,
+                anonYear: false,
+                wish: 'chúc mừng 20/11',
+                differentTeacher: true,
+            }
+        )
+    }
+
+    resetInfo(){
+        this.setState({
+            identityName: null,
+            identityClass: null,
+            identityYear: "",
+            teacher: "",
+            anonName: false,
+            anonClass: false,
+            anonYear: false,
+            wish: null,
+            differentTeacher: false,
+        })
+    }
+
     render() {
         console.log(this.state.existingTeachers)
         console.log(this.state.teacher)
@@ -106,7 +152,6 @@ export default class FormToReg extends React.Component {
             if (!this.state.submit) {
                 return (
                     <div id="form">
-                        <LoadingScreen loading={this.state.loading} /> 
                         <Form onSubmit={this.handleSubmit} className="form">
                             <Form.Group controlId="formBasicName">
                                 <Form.Label>Name</Form.Label>
@@ -196,7 +241,19 @@ export default class FormToReg extends React.Component {
                                 </Button>
                             </div>
                         </Form>
-                        <WarningPopup warn={this.state.errorMsg} warnError={true}/>
+                        <WarningPopup warn={this.state.errorMsg} />
+                        <LoadingScreen loading={this.state.loading} /> 
+                        
+                        {/* Quick and dirty way of rendering the debug menu based on debug status */}
+                        {this.state.debug ? (
+                            <div>
+                                <p>DEBUG OPTIONS</p>
+                                <button onClick={this.debugError} >Test Error</button>
+                                <button onClick={this.debugLoadingScreen} >Test loading screen</button>
+                                <button onClick={this.debugInfo}>Fill in demo info</button>
+                                <button onClick={this.resetInfo}>reset info</button>
+                            </div>
+                        ): ("")}
                     </div>
                 )
             }
@@ -211,48 +268,52 @@ export default class FormToReg extends React.Component {
     }
 }
 
-class DebugMenu extends React.Component {
-    render(){
-        return(
-            <div>
-                <button>Test Error</button>
-                <button>Test loading screen</button>
-            </div>
-        )
-
-    }
-}
-
 class LoadingScreen extends React.Component {
     render(){
         let loadingScreenStyle = {
-            'background-color': "rgb(0, 0, 0)",
-            opacity: "50%",
-            margin: "0px",
-            height: "100vh",
-            width: "100%",
-            position: "absolute"
+            // 'background-color': "rgba(0, 0, 0, 0.5)",
+            // overflow: "auto"
         };
 
         let loadingIconStyle = {
-            width: "100%",
             height: "48px",
+            width: "100%",
             display: "flex",
             'justify-content': "center",
-            'align-items': "center"
+            'align-items': "center",
+            //filter: "invert(97%) sepia(97%) saturate(0%) hue-rotate(24deg) brightness(103%) contrast(105%)" //white filter for the loading icon
+        }
+
+        let loadingTextStyle = {
+            //color: 'white',
+            display: 'inline',
+            'text-align': 'center'
         }
 
         if(this.props.loading){
             return(
                 <div style={loadingScreenStyle}>
                     <LoadingIcon style={loadingIconStyle}/>
+                    <p style={loadingTextStyle}>Đang xử lý...</p>
                 </div>
             )
         } else {
             return (null)
         }
+    }
+}
+
+class WarningPopup extends React.Component {
+    render(){
+        if(!this.props.warn){
+            console.log('nothing happen');
+            return null;
+        }
+
+        console.log('something happen');
+
         return(
-            <div className="warning-popup" style={{width:"50%", margin:"auto", textAlign:"center"}}>
+            <div className="warning-popup" style={{width:"50%", margin:"auto", textAlign:"center", position: "absolute", top: 0}}>
                 <Alert variant="danger">
                     {this.props.warn}
                 </Alert>
