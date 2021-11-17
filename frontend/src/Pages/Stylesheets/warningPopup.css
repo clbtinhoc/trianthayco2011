@@ -1,0 +1,22 @@
+.WarningBox {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    margin: 5px;
+    padding: -4px 4px 0px 4px;
+}
+
+.WarningText {
+    color: white;
+    font-size: 0.875em;
+    text-align: center;
+}
+
+.WarningYellow {
+    background-color: rgb(128, 128, 61);
+}
+
+.WarningRed {
+    background-color: red;
+}
