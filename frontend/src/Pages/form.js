@@ -1,12 +1,13 @@
 import React from "react"
 import "./Stylesheets/form.css"
-import {ReactComponent as LoadingIcon} from '../Assets/Rolling-1s-200px.svg' //Loading icon
 
 import Select from 'react-select';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import Alert from 'react-bootstrap/Alert';
+import LoadingPopup from "./MiniComponents/LoadingPopup";
+import WarningPopup from "./MiniComponents/WarningPopup";
+
 export default class FormToReg extends React.Component {
     constructor(props) {
         super(props);
@@ -141,62 +142,61 @@ export default class FormToReg extends React.Component {
         console.log(this.state.teacher)
         let teacherOptions = this.state.existingTeachers.map(teacher => {
             return { value: teacher, label: teacher }
-        })
-
-        let loadingIconStyle = {
-            width: "100%",
-            height: "24px",
-            display: this.state.loadedTeachers ? 'none' : 'inline'
-        };
-        
+        })        
             if (!this.state.submit) {
                 return (
                     <div id="form">
                         <Form onSubmit={this.handleSubmit} className="form" >
                             <Form.Group controlId="formBasicName" class="formInputName">
-                                <Form.Label class="formAnonOption">Họ và tên</Form.Label>
-                                <Form.Check  type="checkbox" label="Ẩn tên" onChange={
+                            <Form.Check  type="checkbox" style={{"margin-right" : "7px"}} onChange={
                                     (e) => {
-                                        this.setState({ anonName: e.target.checked })
+                                        this.setState({ anonName: !e.target.checked })
                                         if (e.target.checked) {
                                             this.setState({ identityName: "" })
                                         }
                                     }}
                                     inline 
+                                    defaultChecked
                                 />
+                                <Form.Label class="formLabel">Họ và tên</Form.Label>
+                                
                                 <Form.Control type="text" placeholder="Nhập tên" disabled={this.state.anonName}
                                     onChange={
                                         (e) => { this.setState({ identityName: e.target.value }) }}
                                 />
                             </Form.Group>
                             <Form.Group controlId="formBasicClass" class="formInputClass">
-                                <Form.Label class="formAnonOption">Lớp</Form.Label>
-                                <Form.Check  type="checkbox" label="Ẩn lớp" onChange={
+                                <Form.Check  type="checkbox" style={{"margin-right" : "7px"}} onChange={
                                     (e) => {
-                                        this.setState({ anonClass: e.target.checked })
+                                        this.setState({ anonClass: !e.target.checked })
                                         if (e.target.checked) {
                                             this.setState({ identityClass: "" })
                                         }
     
                                     }}
                                     inline
+                                    defaultChecked
                                 />
+                                <Form.Label class="formLabel">Lớp</Form.Label>
+                                
                                 <Form.Control type="text" placeholder="Nhập lớp" onChange={
                                     (e) => { this.setState({ identityClass: e.target.value }) }}
                                     disabled={this.state.anonClass}
                                 />
                             </Form.Group>
                             <Form.Group controlId="formBasicYear" class="formInputYear">
-                                <Form.Label class="formAnonOption">Năm học</Form.Label>
-                                <Form.Check type="checkbox" label="Ẩn năm học" onChange={
+                                <Form.Check type="checkbox" style={{"margin-right" : "7px"}} onChange={
                                     (e) => {
-                                        this.setState({ anonYear: e.target.checked })
+                                        this.setState({ anonYear: !e.target.checked })
                                         if (e.target.checked) {
                                             this.setState({ identityYear: "" })
                                         }
                                     }}
                                     inline
+                                    defaultChecked
                                 />
+                                <Form.Label class="formLabel">Năm học</Form.Label>
+
                                 <Select
                                     isDisabled={this.state.anonYear}
                                     options={this.years}
@@ -204,8 +204,8 @@ export default class FormToReg extends React.Component {
                                 />
                             </Form.Group>
                             <Form.Group controlId="formBasicTeacher" class="formInputName">
-                                <Form.Label >Thầy / cô</Form.Label>
-                                <LoadingIcon style={loadingIconStyle}/>
+                                <Form.Label >Gửi đến thầy/cô</Form.Label>
+                                <LoadingPopup loading={!this.state.loadedTeachers} loadingMsg="Load danh sách thầy cô..."/>
                                 <Select
                                     isDisabled={this.state.differentTeacher || !this.state.loadedTeachers} //disable teacher list until it has been loaded
                                     options={teacherOptions}
@@ -221,13 +221,13 @@ export default class FormToReg extends React.Component {
     
                                     }
                                 ></Form.Check>
-                                <Form.Control type="text" placeholder="Họ tên thầy/cô" onChange={
+                                <Form.Control type="text" placeholder="Điền họ/tên (nếu không có)" onChange={
                                     (e) => { this.setState({ teacher: e.target.value }) }}
                                     disabled={!this.state.differentTeacher}
                                 />
                             </Form.Group>
-                            <Form.Group controlId="formBasicWish" class="" class="formInputName">
-                                <Form.Label>Lời chúc</Form.Label>
+                            <Form.Group controlId="formBasicWish" class="formInputName">
+                                <Form.Label>Điều bạn muốn gửi gấm đến thầy/cô (dưới 250 từ)</Form.Label>
                                 <Form.Control as="textarea" rows="3"  required onChange={
                                     (e) => { this.setState({ wish: e.target.value }) }}
                                 />
@@ -239,7 +239,7 @@ export default class FormToReg extends React.Component {
                             </div>
                         </Form>
                         <WarningPopup warn={this.state.errorMsg} />
-                        <LoadingScreen loading={this.state.loading} /> 
+                        <LoadingPopup loading={this.state.loading} loadingMsg="Đang xử lý dữ liệu..."/> 
                         
                         {/* Quick and dirty way of rendering the debug menu based on debug status */}
                         {this.state.debug ? (
@@ -264,59 +264,5 @@ export default class FormToReg extends React.Component {
                 )
             }
         
-    }
-}
-
-class LoadingScreen extends React.Component {
-    render(){
-        let loadingScreenStyle = {
-            // 'background-color': "rgba(0, 0, 0, 0.5)",
-            // overflow: "auto"
-        };
-
-        let loadingIconStyle = {
-            height: "48px",
-            width: "100%",
-            display: "flex",
-            'justify-content': "center",
-            'align-items': "center",
-            //filter: "invert(97%) sepia(97%) saturate(0%) hue-rotate(24deg) brightness(103%) contrast(105%)" //white filter for the loading icon
-        }
-
-        let loadingTextStyle = {
-            //color: 'white',
-            display: 'inline',
-            'text-align': 'center'
-        }
-
-        if(this.props.loading){
-            return(
-                <div style={loadingScreenStyle}>
-                    <LoadingIcon style={loadingIconStyle}/>
-                    <p style={loadingTextStyle}>Đang xử lý...</p>
-                </div>
-            )
-        } else {
-            return (null)
-        }
-    }
-}
-
-class WarningPopup extends React.Component {
-    render(){
-        if(!this.props.warn){
-            console.log('nothing happen');
-            return null;
-        }
-
-        console.log('something happen');
-
-        return(
-            <div className="warning-popup" style={{width:"50%", margin:"auto", textAlign:"center", position: "absolute", top: 0}}>
-                <Alert variant="danger">
-                    Lỗi: {this.props.warn}
-                </Alert>
-            </div>
-        )
     }
 }

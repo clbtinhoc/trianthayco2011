@@ -1,4 +1,3 @@
-
 #form {
     margin: auto;
     display: flex;
@@ -13,6 +12,9 @@
     border-radius: 8px;
 }
 
+.form.check-checkbox {
+    margin-right: 2px;
+}
 
 .form{
     display: grid;
@@ -35,8 +37,13 @@
     grid-column-end: 3;
 }
 
-.formAnonOption {
-    margin-right: 10px;
+.formLabel {
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+
+.formAnonOption-label {
+    color: gray;
 }
 
 .submitButton{
@@ -44,8 +51,6 @@
     margin: auto;
     background-color: green;
 }
-
-
 
 @media screen and (max-width: 445px) {
     #form{

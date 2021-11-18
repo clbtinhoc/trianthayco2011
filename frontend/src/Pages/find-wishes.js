@@ -10,7 +10,7 @@ export default class StartGetwish extends React.Component {
         }
     }
     componentDidMount() {
-        fetch("http://localhost:5001/tri-an-2011/asia-east2/apigetTeacherNames")
+        fetch("http://localhost:5001/tri-an-2011/asia-east2/api/getTeacherNames")
             .then(res => res.json())
             .then(data => {
                 this.setState({
