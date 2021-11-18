@@ -44,7 +44,7 @@ export default class FormToReg extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://asia-east2-tri-an-2011.cloudfunctions.net/api/getTeacherNames")
+        fetch("http://localhost:5001/tri-an-2011/asia-east2/api/getTeacherNames")
             .then(res => res.json())
             .then(data => {
                 this.setState({
@@ -61,7 +61,7 @@ export default class FormToReg extends React.Component {
         e.preventDefault();
         clearInterval(this.state.errorTimeout)
         this.setState({loading: true})
-        fetch("https://asia-east2-tri-an-2011.cloudfunctions.net/api/add", {
+        fetch("http://localhost:5001/tri-an-2011/asia-east2/api/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -152,69 +152,26 @@ export default class FormToReg extends React.Component {
             if (!this.state.submit) {
                 return (
                     <div id="form">
-                        <Form onSubmit={this.handleSubmit} className="form">
-                            <Form.Group controlId="formBasicName">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter name" disabled={this.state.anonName}
-                                    onChange={
-                                        (e) => { this.setState({ identityName: e.target.value }) }}
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="formBasicClass">
-                                <Form.Label>Class</Form.Label>
-                                <Form.Control type="text" placeholder="Enter class" onChange={
-                                    (e) => { this.setState({ identityClass: e.target.value }) }}
-                                    disabled={this.state.anonClass}
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="formBasicYear">
-                                <Form.Label>Year</Form.Label>
-                                <Select
-                                    isDisabled={this.state.anonYear}
-                                    options={this.years}
-                                    onChange={(e) => { this.setState({ identityYear: e.value }) }}
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="formBasicTeacher">
-                                <Form.Label >Teacher</Form.Label>
-                                <LoadingIcon style={loadingIconStyle}/>
-                                <Select
-                                    isDisabled={this.state.differentTeacher || !this.state.loadedTeachers} //disable teacher list until it has been loaded
-                                    options={teacherOptions}
-                                    onChange={(e) => { this.setState({ teacher: e.value }) }}
-                                />
-                                
-                                <Form.Check type="checkbox"
-                                    label="Different teacher from list"
-                                    onChange={
-                                        (e) => {
-                                            this.setState({ differentTeacher: e.target.checked })
-                                        }
-    
-                                    }
-                                ></Form.Check>
-                                <Form.Control type="text" placeholder="Enter teacher name" onChange={
-                                    (e) => { this.setState({ teacher: e.target.value }) }}
-                                    disabled={!this.state.differentTeacher}
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="formBasicWish">
-                                <Form.Label>Wish</Form.Label>
-                                <Form.Control as="textarea" rows="3"  required onChange={
-                                    (e) => { this.setState({ wish: e.target.value }) }}
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="formBasicSubmit">
-                                <Form.Check type="checkbox" label="Hide my name" onChange={
+                        <Form onSubmit={this.handleSubmit} className="form" >
+                            <Form.Group controlId="formBasicName" class="formInputName">
+                                <Form.Label class="formAnonOption">Họ và tên</Form.Label>
+                                <Form.Check  type="checkbox" label="Ẩn tên" onChange={
                                     (e) => {
                                         this.setState({ anonName: e.target.checked })
                                         if (e.target.checked) {
                                             this.setState({ identityName: "" })
                                         }
                                     }}
-                                    inline
+                                    inline 
                                 />
-                                <Form.Check type="checkbox" label="Hide my class" onChange={
+                                <Form.Control type="text" placeholder="Nhập tên" disabled={this.state.anonName}
+                                    onChange={
+                                        (e) => { this.setState({ identityName: e.target.value }) }}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="formBasicClass" class="formInputClass">
+                                <Form.Label class="formAnonOption">Lớp</Form.Label>
+                                <Form.Check  type="checkbox" label="Ẩn lớp" onChange={
                                     (e) => {
                                         this.setState({ anonClass: e.target.checked })
                                         if (e.target.checked) {
@@ -224,7 +181,14 @@ export default class FormToReg extends React.Component {
                                     }}
                                     inline
                                 />
-                                <Form.Check type="checkbox" label="Hide my school year" onChange={
+                                <Form.Control type="text" placeholder="Nhập lớp" onChange={
+                                    (e) => { this.setState({ identityClass: e.target.value }) }}
+                                    disabled={this.state.anonClass}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="formBasicYear" class="formInputYear">
+                                <Form.Label class="formAnonOption">Năm học</Form.Label>
+                                <Form.Check type="checkbox" label="Ẩn năm học" onChange={
                                     (e) => {
                                         this.setState({ anonYear: e.target.checked })
                                         if (e.target.checked) {
@@ -233,11 +197,44 @@ export default class FormToReg extends React.Component {
                                     }}
                                     inline
                                 />
+                                <Select
+                                    isDisabled={this.state.anonYear}
+                                    options={this.years}
+                                    onChange={(e) => { this.setState({ identityYear: e.value }) }}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="formBasicTeacher" class="formInputName">
+                                <Form.Label >Thầy / cô</Form.Label>
+                                <LoadingIcon style={loadingIconStyle}/>
+                                <Select
+                                    isDisabled={this.state.differentTeacher || !this.state.loadedTeachers} //disable teacher list until it has been loaded
+                                    options={teacherOptions}
+                                    onChange={(e) => { this.setState({ teacher: e.value }) }}
+                                />
+                                
+                                <Form.Check type="checkbox"
+                                    label="Thêm tên thầy cô"
+                                    onChange={
+                                        (e) => {
+                                            this.setState({ differentTeacher: e.target.checked })
+                                        }
     
+                                    }
+                                ></Form.Check>
+                                <Form.Control type="text" placeholder="Họ tên thầy/cô" onChange={
+                                    (e) => { this.setState({ teacher: e.target.value }) }}
+                                    disabled={!this.state.differentTeacher}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="formBasicWish" class="" class="formInputName">
+                                <Form.Label>Lời chúc</Form.Label>
+                                <Form.Control as="textarea" rows="3"  required onChange={
+                                    (e) => { this.setState({ wish: e.target.value }) }}
+                                />
                             </Form.Group>
                             <div style={{width:"fit-content", margin:"auto"}}>
                                 <Button variant="primary" type="submit">
-                                    Submit
+                                    Gửi
                                 </Button>
                             </div>
                         </Form>
@@ -252,6 +249,7 @@ export default class FormToReg extends React.Component {
                                 <button onClick={this.debugLoadingScreen} >Test loading screen</button>
                                 <button onClick={this.debugInfo}>Fill in demo info</button>
                                 <button onClick={this.resetInfo}>reset info</button>
+                                <button onClick={() => this.setState({submit: true})}>After submit page</button>
                             </div>
                         ): ("")}
                     </div>
@@ -261,6 +259,7 @@ export default class FormToReg extends React.Component {
                 return (
                     <div id="form">
                         <h1>Thanks for submitting</h1>
+                        <Button onClick={() => this.setState({submit: false})}>Quay lại</Button>
                     </div>
                 )
             }
@@ -315,7 +314,7 @@ class WarningPopup extends React.Component {
         return(
             <div className="warning-popup" style={{width:"50%", margin:"auto", textAlign:"center", position: "absolute", top: 0}}>
                 <Alert variant="danger">
-                    {this.props.warn}
+                    Lỗi: {this.props.warn}
                 </Alert>
             </div>
         )
