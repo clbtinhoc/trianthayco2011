@@ -15,7 +15,28 @@
 
 
 .form{
+    display: grid;
+    gap: 5px 10px;
     width: 100%;
+}
+
+.formInputName {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.formInputClass {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.formInputYear {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.formAnonOption {
+    margin-right: 10px;
 }
 
 .submitButton{
