@@ -245,7 +245,7 @@ export default class FormToReg extends React.Component {
                         <LoadingScreen loading={this.state.loading} /> 
                         
                         {/* Quick and dirty way of rendering the debug menu based on debug status */}
-                        {this.state.debug ? (
+                        {/* {this.state.debug ? (
                             <div>
                                 <p>DEBUG OPTIONS</p>
                                 <button onClick={this.debugError} >Test Error</button>
@@ -253,7 +253,7 @@ export default class FormToReg extends React.Component {
                                 <button onClick={this.debugInfo}>Fill in demo info</button>
                                 <button onClick={this.resetInfo}>reset info</button>
                             </div>
-                        ): ("")}
+                        ): ("")} */}
                     </div>
                 )
             }
