@@ -1,30 +1,56 @@
-#form {
+#container {
+    display: grid;
     margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    /* background-color: #E5E5E5; */
-    /* width: 50vw; */
-    background-color: white;
+    background: conic-gradient(from 180deg at 50% 53.42%, #FFD9D0 -139deg, #E6ECFE 75.79deg, #FFE2C7 136.88deg, #FFD9D0 221deg, #E6ECFE 435.79deg);;;
     width: 60vw;
     padding: 1vw;
-    border-radius: 8px;
+}
+
+#formContainer {
+    display: grid;
+    border-radius: 0px;
+    margin: 30px;
+    padding: 20px;
+    border: 4px solid #C05C00;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    /* background-color: #E5E5E5; */
+    /* width: 50vw; */
+}
+
+#TriAnText {
+    font-family: displayFont;
+    font-size: 60px;
+    line-height: 100px;
+    color: #AB1C1C;
+    text-align: center;
+    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+    margin: 0;
+    max-width: 100%;
 }
 
 .form.check-checkbox {
     margin-right: 2px;
 }
 
-.form{
+.formMain{
     display: grid;
     gap: 5px 10px;
     width: 100%;
 }
 
+.decor {
+    display: inline;
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+
 .formInputName {
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
 }
 
 .formInputClass {
@@ -34,12 +60,13 @@
 
 .formInputYear {
     grid-column-start: 2;
-    grid-column-end: 3;
+    grid-column-end: 4;
 }
 
 .formLabel {
     margin-right: 15px;
     margin-bottom: 5px;
+    color: #C05C00;
 }
 
 .formAnonOption-label {
@@ -52,9 +79,60 @@
     background-color: green;
 }
 
-@media screen and (max-width: 445px) {
-    #form{
+@media screen and (max-width: 1080px) {
+    .formMain{
+        display: grid;
         width: 100%;
+        grid-column-start: 1;
+        grid-column-end: 5;
+    }
+    
+
+    #container {
+        margin: auto;
+        background: conic-gradient(from 180deg at 50% 53.42%, #FFD9D0 -139deg, #E6ECFE 75.79deg, #FFE2C7 136.88deg, #FFD9D0 221deg, #E6ECFE 435.79deg);;;
+        width: 80vw;
+        padding: 1vw;
     }
 
+    #formContainer {
+        display: grid;
+        border-radius: 0px;
+        margin: 20px;
+        padding: 10px;
+        border: 4px solid #C05C00;
+        /* justify-content: center; */
+        align-items: center;
+        /* background-color: #E5E5E5; */
+        /* width: 50vw; */
+    }
+
+    .decor {
+        grid-column-start: 1;
+        grid-column-end: 5;
+    }
+    
+    .formInputName {
+        grid-column-start: 1;
+        grid-column-end: 5;
+    }
+
+    .formInputYear {
+        grid-column-start: 2;
+        grid-column-end: 5;
+    }
+}
+
+@media screen {
+    
+}
+
+@font-face {
+    font-family:'displayFont';
+	src:
+		url('../../Assets/font/SVN-DessertMenuScript.woff2') format('woff2'),
+		url('../../Assets/font/SVN-DessertMenuScript.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
 }
