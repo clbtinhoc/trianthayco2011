@@ -21,3 +21,8 @@
     }
 
 }
+
+#Rendered {
+    display: flex;
+    justify-content: center;
+}

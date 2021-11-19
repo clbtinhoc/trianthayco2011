@@ -12,10 +12,10 @@ class Renderer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            ok: true,
             wish: null,
-            loading: false,
+            loading: true,
             errorMsg: null,
-            errorTimeout: null,
         }
     }
     componentDidMount() {
@@ -25,13 +25,14 @@ class Renderer extends React.Component {
             .then(data => {
                 this.setState({ });
                 this.setState({
+                    ok: true,
                     wish: data,
                     loading: false
                 })
 
             })
             .catch(err => {
-                this.setState({ errorMsg: err.message, errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
+                this.setState({ errorMsg: err.message})
                 this.setState({ ok: false, loading: false, errorMsg: err.message });
             });
     }
@@ -40,15 +41,16 @@ class Renderer extends React.Component {
         let Rendered;
         let teacherName = this.props.params.teacher
         let index = this.props.params.index
-        if (data != null) {
-            let preview = JSON.stringify(data.wish)
+        if (data != null && this.state.ok) {
+        
             let wish = {
                 author: "" + JSON.stringify(data.identity.name),
                 class: "lớp " + JSON.stringify(data.identity.class),
                 year: "năm học " + JSON.stringify(data.identity.year),
                 preview: JSON.stringify(data.wish).substring(1, data.wish.length - 1),
             }
-            console.log(data.identity.name === null)
+            console.log(data.wish)
+            // console.log(data.identity.name === null)
             if (data.identity.name === null || data.identity.name === "") {
                 wish.author = ""
             }
@@ -66,6 +68,7 @@ class Renderer extends React.Component {
             else {
                 message = `${wish.author} ${wish.class} ${wish.year}`
             }
+            
             // Rendered = function () {
             //     return (
             //         <div>
@@ -99,13 +102,16 @@ class Renderer extends React.Component {
             // }
 
             Rendered = function () {
+                
                 return (
                     <div>
-                        <Button onClick={() => {window.location = `./`}}>Quay lại</Button>
+ 
                         <Card style={{ width: "fit-content", margin: "auto" }} >
                             <Card.Body>
 
-                                <Card.Title>{wish.preview}</Card.Title>
+                                <Card.Title style={{whiteSpace: "pre-line"}}>
+                                    {data.wish}
+                                </Card.Title>
                                 <Card.Text>
                                     Từ {message}
                                 </Card.Text>
@@ -124,7 +130,7 @@ class Renderer extends React.Component {
                                 <BsLink45Deg /> Copy link
 
                             </div>
-                            <input hidden id="link" value={`https://tri-an-2011.web.app/getwish/${teacherName}/${index}`} />
+                            <input hidden id="link" value={`https://localhost:3000/getwish/${teacherName}/${index}`} />
                         </div>
                     </div>
                 )
@@ -132,11 +138,23 @@ class Renderer extends React.Component {
         }
         else {
             Rendered = function () {
-                return (<p>Lời chúc này không tồn tại</p>)
+                return (
+                    <div>
+                        <p>Lời chúc này không tồn tại</p>
+                    
+                    </div>
+
+                )
             }
         }
         return (
-            <Rendered />
+            <div id="Rendered">
+                
+                <WarningPopup warn={this.state.errorMsg}/>
+                <LoadingPopup loading={this.state.loading} loadingMsg="Đang tải lời chúc..."/>
+                <Rendered style={{visibility: this.state.loading ? "hidden" : "visible"}} />
+            </div>
+
         )
     }
 }
@@ -145,5 +163,10 @@ class Renderer extends React.Component {
 export default function GetAWish() {
     let params = useParams();
     console.log(params);
-    return <Renderer params={params} />
+    return (
+    <div>
+        <Button onClick={() => {window.location = "./"}} style={{"margin-left": "10vw"}}> Quay Lại </Button>
+        <Renderer params={params} />
+    </div>
+    )
 }

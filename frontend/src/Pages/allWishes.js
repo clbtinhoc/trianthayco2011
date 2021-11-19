@@ -49,10 +49,10 @@ class RenderWish extends React.Component {
             // let preview = JSON.stringify(data.content.wish).substring(0, 20)
             // let preview = JSON.stringify(data.wish) 
             let wish = {
-                author: "bạn " +JSON.stringify(data.identity.name).substring(1, JSON.stringify(data.identity.name).length - 1),
-                class: "lớp " + JSON.stringify(data.identity.class).substring(1, JSON.stringify(data.identity.class).length - 1),
-                year: "năm học " + JSON.stringify(data.identity.year).substring(1, JSON.stringify(data.identity.year).length - 1),
-                preview: JSON.stringify(data.wish).substring(1, data.wish.length - 1).slice(0, 20) + "...",
+                author: data.identity.name,
+                class: "lớp " + data.identity.class,
+                year: "năm học " + data.identity.year,
+                preview: data.wish + "...",
             }
             if (data.identity.name === null || data.identity.name === "") {
                 wish.author = "một bạn ẩn danh"
@@ -113,7 +113,7 @@ class RenderWish extends React.Component {
         if (this.state.ok) {
             return (
                 <div style={{width:"70%", margin:"auto"}}>
-                    <Button onClick={() => {window.location = '/start-getwish'}}>Quay lại</Button>
+                    
                     <h3 style={{textAlign:"center", color:"white"}}>{this.state.teacherName}</h3>
                     <div className="wishes">
                         {wishes}
@@ -136,5 +136,11 @@ class RenderWish extends React.Component {
 }
 export default function AllWishes() {
     let params = useParams();
-    return <RenderWish name={params.teacher} />
+    return (
+        <div>
+            <Button onClick={() => {window.location = '/start-getwish'}} style={{"margin-left": "10vw"}}>Quay Lại</Button>
+            <RenderWish name={params.teacher} />
+        </div>
+       
+    )
 }
