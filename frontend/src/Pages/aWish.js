@@ -102,7 +102,6 @@ class Renderer extends React.Component {
             // }
 
             Rendered = function () {
-                
                 return (
                     <div>
  
