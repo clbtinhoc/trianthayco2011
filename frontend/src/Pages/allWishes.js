@@ -116,7 +116,7 @@ class RenderWish extends React.Component {
             return (
                 <div style={{width:"70%", margin:"auto"}}>
                     <div className="teacherNameContainer">
-                        <img src={teacherNameFrame} />
+                        <img src={teacherNameFrame} alt="khung tên"/>
                         <div class="teacherNameText">{this.state.teacherName}</div>
                     </div>
                     <div className="wishes">

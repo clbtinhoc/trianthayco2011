@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "./Stylesheets/aWish.css"
 import { BsLink45Deg } from "react-icons/bs";
-import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
 
 import letter from '../Assets/Group 1.png'
@@ -120,7 +119,7 @@ class Renderer extends React.Component {
                         <div className="imgContainer">
                                 <div className="mainText">{data.wish}</div>
                                 <div className="miniText">Từ {message}</div>
-                                <img src={letter} className="mainImg"/>
+                                <img src={letter} className="mainImg" alt="Nền bức thư"/>
                         </div>
                         <div className="controls">
                             Chia sẻ lời chúc này cho người thân

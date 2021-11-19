@@ -8,7 +8,7 @@ export default function Footer() {
     return (
         <div className="footer">
             <p>Dự án 20/11 của câu lạc bộ Tin Học Trần Đại Nghĩa</p>
-            <img src={Logo} className="clubLogo"/> 
+            <img src={Logo} className="clubLogo" alt="logo CLB"/> 
         </div>
     );
 
