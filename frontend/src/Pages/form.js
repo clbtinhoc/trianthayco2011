@@ -154,21 +154,21 @@ export default class FormToReg extends React.Component {
                     <div id="form">
                         <Form onSubmit={this.handleSubmit} className="form">
                             <Form.Group controlId="formBasicName">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter name" disabled={this.state.anonName}
+                                <Form.Label>Họ tên</Form.Label>
+                                <Form.Control type="text" placeholder="Tên" disabled={this.state.anonName}
                                     onChange={
                                         (e) => { this.setState({ identityName: e.target.value }) }}
                                 />
                             </Form.Group>
                             <Form.Group controlId="formBasicClass">
-                                <Form.Label>Class</Form.Label>
-                                <Form.Control type="text" placeholder="Enter class" onChange={
+                                <Form.Label>Lớp</Form.Label>
+                                <Form.Control type="text" placeholder="Lớp" onChange={
                                     (e) => { this.setState({ identityClass: e.target.value }) }}
                                     disabled={this.state.anonClass}
                                 />
                             </Form.Group>
                             <Form.Group controlId="formBasicYear">
-                                <Form.Label>Year</Form.Label>
+                                <Form.Label>Năm học vào trường</Form.Label>
                                 <Select
                                     isDisabled={this.state.anonYear}
                                     options={this.years}
@@ -176,7 +176,7 @@ export default class FormToReg extends React.Component {
                                 />
                             </Form.Group>
                             <Form.Group controlId="formBasicTeacher">
-                                <Form.Label >Teacher</Form.Label>
+                                <Form.Label >Họ tên thầy cô</Form.Label>
                                 <LoadingIcon style={loadingIconStyle}/>
                                 <Select
                                     isDisabled={this.state.differentTeacher || !this.state.loadedTeachers} //disable teacher list until it has been loaded
@@ -185,7 +185,7 @@ export default class FormToReg extends React.Component {
                                 />
                                 
                                 <Form.Check type="checkbox"
-                                    label="Different teacher from list"
+                                    label="Thầy cô không có trong danh sách"
                                     onChange={
                                         (e) => {
                                             this.setState({ differentTeacher: e.target.checked })
@@ -193,13 +193,13 @@ export default class FormToReg extends React.Component {
     
                                     }
                                 ></Form.Check>
-                                <Form.Control type="text" placeholder="Enter teacher name" onChange={
+                                <Form.Control type="text" placeholder="Nhập tên thầy cô" onChange={
                                     (e) => { this.setState({ teacher: e.target.value }) }}
                                     disabled={!this.state.differentTeacher}
                                 />
                             </Form.Group>
                             <Form.Group controlId="formBasicWish">
-                                <Form.Label>Wish</Form.Label>
+                                <Form.Label>Lời chúc</Form.Label>
                                 <Form.Control as="textarea" rows="3"  required onChange={
                                     (e) => { this.setState({ wish: e.target.value }) }}
                                 />
