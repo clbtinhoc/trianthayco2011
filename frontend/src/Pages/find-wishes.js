@@ -29,7 +29,7 @@ export default class StartGetwish extends React.Component {
     render() {
         return (
             <div style={{width:"70%", margin:"auto"}}>
-                <h3 style={{color: "white", textAlign: "center"}}>Choose a name to view their wishes</h3>
+                <h3 style={{color: "black", textAlign: "center"}}>Chọn tên một thầy cô để xem lời chúc</h3>
                 <Select
                     value={{ value: this.state.value, label: this.state.value }}
                     onChange={(selectedValue) => {

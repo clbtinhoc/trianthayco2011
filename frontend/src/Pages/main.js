@@ -19,10 +19,7 @@ export default class Main extends React.Component {
                         <h2 id="to">to our</h2>
 
                     </div> */}
-                    <div className="teacherthing">
-                        <h2 style={{ margin: 0, padding: 0 }}> best grateful and charming </h2>
 
-                    </div>
                     {/* <div className="something"> */}
                     <h2 style={{ fontSize: "6rem", margin: 0 }}
                         className="teacherthinglol">teachers</h2>

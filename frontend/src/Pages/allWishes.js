@@ -103,7 +103,7 @@ class RenderWish extends React.Component {
         if (this.state.ok) {
             return (
                 <div style={{width:"70%", margin:"auto"}}>
-                    <h3 style={{textAlign:"center", color:"white"}}>Display wishes for {this.state.teacherName}</h3>
+                    <h3 style={{textAlign:"center", color:"black"}}>Đang thể hiện lời chúc cho {this.state.teacherName}</h3>
                     <div className="wishes">
                         {wishes}
                     </div>

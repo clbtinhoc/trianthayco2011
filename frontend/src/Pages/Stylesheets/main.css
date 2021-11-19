@@ -259,6 +259,7 @@ body {
         margin: auto;
         /* width: 50%; */
         justify-content: center;
+        font-size: 0.75rem;
     }
     
     .buttons-to-redirect a {
