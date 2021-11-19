@@ -29,10 +29,12 @@ router.post('/add', (req, res) => {
                     }
                 ],
             })
-            res.send({
-                status: "success",
-                message: "Wish added"
-            })
+            // Res.send array length of wishes firestore collection Content document teacherName
+            admin.firestore().collection('Content').doc(teacherName).get().then(doc => {
+                res.send(doc.data().wishes.length);
+            }
+            )
+
         }
         else {
             admin.firestore().collection('Content').doc(data.content.teacherName).update({
@@ -41,10 +43,11 @@ router.post('/add', (req, res) => {
                     wish: data.content.wish
                 })
             })
-            res.send({
-                status: "success",
-                message: "Wish added"
-            })
+            // Res.send array length of wishes firestore collection Content document teacherName
+            admin.firestore().collection('Content').doc(teacherName).get().then(doc => {
+                res.send(doc.data().wishes.length);
+            }
+            )
             
         }
 
