@@ -115,7 +115,7 @@ class Renderer extends React.Component {
                                 <BsLink45Deg /> Copy link
 
                             </div>
-                            <input hidden id="link" value={`https://localhost:3000/getwish/${teacherName}/${index}`} />
+                            <input hidden id="link" value={`https://tri-an-2011.web.app/getwish/${teacherName}/${index}`} />
                         </div>
                     </div>
                 )
