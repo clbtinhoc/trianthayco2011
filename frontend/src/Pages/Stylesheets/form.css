@@ -1,17 +1,18 @@
 #container {
     display: grid;
     margin: auto;
-    background: conic-gradient(from 180deg at 50% 53.42%, #FFD9D0 -139deg, #E6ECFE 75.79deg, #FFE2C7 136.88deg, #FFD9D0 221deg, #E6ECFE 435.79deg);;;
-    width: 60vw;
-    padding: 1vw;
+    /* background: conic-gradient(from 180deg at 50% 53.42%, #FFD9D0 -139deg, #E6ECFE 75.79deg, #FFE2C7 136.88deg, #FFD9D0 221deg, #E6ECFE 435.79deg);;; */
+    width: 60vw; 
+    background-color: #ffebd0;
+    border: 3px solid rgba(61, 30, 0, 0.25);
 }
 
 #formContainer {
     display: grid;
     border-radius: 0px;
-    margin: 30px;
-    padding: 20px;
-    border: 4px solid #C05C00;
+    margin: 20px;
+    padding: 40px 20px;
+    border: 4px solid #6b5638;
     /* justify-content: center; */
     align-items: center;
     flex-direction: column;
@@ -21,31 +22,76 @@
     /* width: 50vw; */
 }
 
-#TriAnText {
-    font-family: displayFont;
-    font-size: 60px;
-    line-height: 100px;
-    color: #AB1C1C;
-    text-align: center;
-    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
-    margin: 0;
-    max-width: 100%;
+
+
+.form-check-inline {
+    margin-right: 2px;
+    
 }
 
-.form.check-checkbox {
-    margin-right: 2px;
+.form-check-input {
+    border: 1px solid #C05C00;
+}
+
+.form-check-input::selection {
+    border: 5px solid #C05C00;
+}
+
+.form-check-input:checked {
+    background-color: #50402A;
+    border: 1px solid #C05C00;
 }
 
 .formMain{
     display: grid;
     gap: 5px 10px;
     width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 4;
 }
 
 .decor {
-    display: inline;
+    display: grid;
+    justify-content: center;
     grid-column-start: 4;
     grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.decorImage {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+#TriAnText {
+    font-family: displayFont;
+    font-size: 60px;
+    line-height: 100px;
+    color: #841F33;
+    text-align: center;
+    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+    margin: 0;
+    max-width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.form-label {
+    font-family: sans-serif;
+    font-size: 20px;
+    color: #9f5a00;
+    margin-left: 4px;
+    margin-right : 4px;
+    margin-bottom: 5px;
+}
+
+.formGroup {
+    margin-bottom: 10px;
 }
 
 .formInputName {
@@ -63,10 +109,39 @@
     grid-column-end: 4;
 }
 
-.formLabel {
-    margin-right: 15px;
-    margin-bottom: 5px;
-    color: #C05C00;
+.form-control {
+    border-radius: px;
+    border: 0px;
+    padding: 7px 7px;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #FF8B1F;
+    border: 0px solid ;
+}
+
+.btn:hover {
+    background-color: #FFB570;
+}
+
+.btn:click {
+    border: 0px;
+}
+
+.select {
+    border-radius: 0px;
+}
+
+
+.react-select-container {
+    border-radius: 10px;
+    border: 0px;
+    padding: 2px 5px;
 }
 
 .formAnonOption-label {
@@ -85,12 +160,28 @@
         width: 100%;
         grid-column-start: 1;
         grid-column-end: 5;
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
+
+    .decorImage {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
     }
     
+    #TriAnText {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
 
     #container {
         margin: auto;
-        background: conic-gradient(from 180deg at 50% 53.42%, #FFD9D0 -139deg, #E6ECFE 75.79deg, #FFE2C7 136.88deg, #FFD9D0 221deg, #E6ECFE 435.79deg);;;
+        background-color: #ffebd0;
+        /* background: conic-gradient(from 180deg at 50% 53.42%, #FFD9D0 -139deg, #E6ECFE 75.79deg, #FFE2C7 136.88deg, #FFD9D0 221deg, #E6ECFE 435.79deg);;; */
         width: 80vw;
         padding: 1vw;
     }
@@ -98,9 +189,8 @@
     #formContainer {
         display: grid;
         border-radius: 0px;
-        margin: 20px;
-        padding: 10px;
-        border: 4px solid #C05C00;
+        margin: 20px 10px;
+        padding: 40px 10px;
         /* justify-content: center; */
         align-items: center;
         /* background-color: #E5E5E5; */
@@ -110,6 +200,8 @@
     .decor {
         grid-column-start: 1;
         grid-column-end: 5;
+        grid-row-start: 2;
+        grid-row-end: 3;
     }
     
     .formInputName {
@@ -123,8 +215,18 @@
     }
 }
 
-@media screen {
-    
+@media screen and (max-width: 480px){
+    .decorImage {
+        width: 128px;
+    }
+    #TriAnText {
+        font-size: 32px;
+        line-height: 50px;
+    }
+
+    .form-label {
+        font-size: 16px;
+    }
 }
 
 @font-face {

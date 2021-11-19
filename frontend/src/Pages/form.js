@@ -10,6 +10,22 @@ import WarningPopup from "./MiniComponents/WarningPopup";
 
 import trangtri2 from "../Assets/trangtri2.png"
 
+const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      color: state.isSelected ? 'yellow' : 'black',
+      backgroundColor: state.isSelected ? 'green' : state.isFocused ? '#FFDCAD' : 'white',
+    }),
+    control: (provided, state) => ({
+      ...provided,
+      border: state.isSelected ? '1px solid black' : '0px',
+      height: '20px',
+      padding: '0px',
+      marginTop: "0px",
+    }),
+    
+  }
+
 export default class FormToReg extends React.Component {
     constructor(props) {
         super(props);
@@ -62,8 +78,16 @@ export default class FormToReg extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        clearInterval(this.state.errorTimeout)
+        clearInterval(this.state.errorTimeout);
         this.setState({loading: true})
+        if(this.state.identityYear === "" && !this.state.anonYear){
+            this.setState({loading: false, errorMsg:"Vui lòng nhập năm học", errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
+            return 0;
+        }
+        if(this.state.teacher === ""){
+            this.setState({loading: false, errorMsg:"Vui lòng nhập tên thầy cô", errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
+            return 0;
+        }
         fetch("http://localhost:5001/tri-an-2011/asia-east2/api/add", {
             method: "POST",
             headers: {
@@ -94,7 +118,7 @@ export default class FormToReg extends React.Component {
     componentDidCatch(error, errorInfo) { //Handle general errors (WARNING: IT DOESNT HANDLE EVENT ERRORS)
         this.setState({errorMsg: error.message, errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
         console.log(errorInfo)
-      }
+    }
 
     debugLoadingScreen(){
         console.log('debugLoadingScreen')
@@ -147,19 +171,21 @@ export default class FormToReg extends React.Component {
         })        
             if (!this.state.submit) {
                 return (
-                    <div id="container">
+                    <div id="container" aspectRatio="">
                         <div id="formContainer">
-                        <div className="decor">
-                                <h1 id="TriAnText">TRI ÂN <br/>THẦY CÔ</h1>
+                            <div className="decor">
                                 <img
                                     src={trangtri2}
                                     width='200px'
                                     alt="decor"
+                                    className="decorImage"
                                 />
+                                <h1 id="TriAnText">TRI ÂN <br/>THẦY CÔ</h1>
+
                             </div>
                             <Form onSubmit={this.handleSubmit} className="formMain" >
-                                <Form.Group controlId="formBasicName" className="formInputName">
-                                <Form.Check  type="checkbox" style={{"margin-right" : "7px"}} onChange={
+                                <Form.Group controlId="formBasicName" className="formInputName formGroup">
+                                <Form.Check  type="checkbox" className ="formCheckbox" onChange={
                                         (e) => {
                                             this.setState({ anonName: !e.target.checked })
                                             if (e.target.checked) {
@@ -171,13 +197,14 @@ export default class FormToReg extends React.Component {
                                     />
                                     <Form.Label className="formLabel">Họ và tên</Form.Label>
                                     
-                                    <Form.Control type="text" placeholder="Nhập tên" disabled={this.state.anonName}
+                                    <Form.Control type="text" placeholder="" disabled={this.state.anonName}
                                         onChange={
                                             (e) => { this.setState({ identityName: e.target.value }) }}
+                                        required={!this.state.anonName}
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="formBasicClass" className="formInputClass">
-                                    <Form.Check  type="checkbox" style={{"margin-right" : "7px"}} onChange={
+                                <Form.Group controlId="formBasicClass" className="formInputClass formGroup">
+                                    <Form.Check  type="checkbox" className ="formCheckbox" onChange={
                                         (e) => {
                                             this.setState({ anonClass: !e.target.checked })
                                             if (e.target.checked) {
@@ -190,13 +217,14 @@ export default class FormToReg extends React.Component {
                                     />
                                     <Form.Label className="formLabel">Lớp</Form.Label>
                                     
-                                    <Form.Control type="text" placeholder="Nhập lớp" onChange={
+                                    <Form.Control type="text" placeholder="" onChange={
                                         (e) => { this.setState({ identityClass: e.target.value }) }}
                                         disabled={this.state.anonClass}
+                                        required={!this.state.anonClass}
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="formBasicYear" className="formInputYear">
-                                    <Form.Check type="checkbox" style={{"margin-right" : "7px"}} onChange={
+                                <Form.Group controlId="formBasicYear" className="formInputYear formGroup">
+                                    <Form.Check type="checkbox" className ="formCheckbox" onChange={
                                         (e) => {
                                             this.setState({ anonYear: !e.target.checked })
                                             if (e.target.checked) {
@@ -209,41 +237,49 @@ export default class FormToReg extends React.Component {
                                     <Form.Label className="formLabel">Năm học</Form.Label>
 
                                     <Select
+                                        styles={customStyles}
+                                        // className="react-select-container"
                                         isDisabled={this.state.anonYear}
+                                        defaultValue={{label: "", value: ""}}
                                         options={this.years}
                                         onChange={(e) => { this.setState({ identityYear: e.value }) }}
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="formBasicTeacher" className="formInputName">
+                                <Form.Group controlId="formBasicTeacher" className="formInputName formGroup">
                                     <Form.Label >Gửi đến thầy/cô</Form.Label>
                                     <LoadingPopup loading={!this.state.loadedTeachers} loadingMsg="Load danh sách thầy cô..."/>
                                     <Select
+                                        styles={customStyles}
                                         isDisabled={this.state.differentTeacher || !this.state.loadedTeachers} //disable teacher list until it has been loaded
                                         options={teacherOptions}
+                                        defaultValue={{label: "", value: ""}}
                                         onChange={(e) => { this.setState({ teacher: e.value }) }}
                                     />
-                                    
-                                    <Form.Check type="checkbox"
-                                        label="Thêm tên thầy cô"
-                                        onChange={
-                                            (e) => {
-                                                this.setState({ differentTeacher: e.target.checked })
+                                    <Form.Group className="formGroup" style={{margin: '10px 0px'}}>
+                                        <Form.Check type="checkbox"
+                                            onChange={
+                                                (e) => {
+                                                    this.setState({ differentTeacher: e.target.checked })
+                                                }
+            
                                             }
-        
-                                        }
-                                    ></Form.Check>
-                                    <Form.Control type="text" placeholder="Điền họ/tên (nếu không có)" onChange={
-                                        (e) => { this.setState({ teacher: e.target.value }) }}
-                                        disabled={!this.state.differentTeacher}
-                                    />
+                                            inline
+                                        ></Form.Check>
+                                        <Form.Label>Thêm tên thầy cô</Form.Label>
+                                        <Form.Control type="text" placeholder="" onChange={
+                                            (e) => { this.setState({ teacher: e.target.value }) }}
+                                            disabled={!this.state.differentTeacher}
+                                        />
+                                    </Form.Group>
+                                    
                                 </Form.Group>
-                                <Form.Group controlId="formBasicWish" className="formInputName">
-                                    <Form.Label>Điều bạn muốn gửi gấm đến thầy/cô (dưới 250 từ)</Form.Label>
-                                    <Form.Control as="textarea" rows="3"  required onChange={
+                                <Form.Group controlId="formBasicWish" className="formInputName formGroup">
+                                    <Form.Label>Điều bạn muốn gửi gấm đến thầy/cô (dưới 100 từ)</Form.Label>
+                                    <Form.Control as="textarea" rows="3"  maxlength="100" required onChange={
                                         (e) => { this.setState({ wish: e.target.value }) }}
                                     />
                                 </Form.Group>
-                                <div style={{width:"fit-content", margin:"auto"}}>
+                                <div style={{width:"fit-content", margin:"auto", alignItems:"center"}}>
                                     <Button variant="primary" type="submit">
                                         Gửi
                                     </Button>
@@ -251,11 +287,8 @@ export default class FormToReg extends React.Component {
                             </Form>
                             <WarningPopup warn={this.state.errorMsg} />
                             <LoadingPopup loading={this.state.loading} loadingMsg="Đang xử lý dữ liệu..."/> 
-
-                            {/* Quick and dirty way of rendering the debug menu based on debug status */}
-
-                            
                         </div> 
+                        {/* Quick and dirty way of rendering the debug menu based on debug status */}
                         {this.state.debug ? (
                                 <div>
                                     <p>DEBUG OPTIONS</p>
@@ -272,8 +305,10 @@ export default class FormToReg extends React.Component {
             else {
                 return (
                     <div id="formContainer">
-                        <h1>Thanks for submitting</h1>
-                        <Button onClick={() => this.setState({submit: false})}>Quay lại</Button>
+                        <h1>Cám ơn bạn đã tham gia!</h1>
+                        
+                        <Button onClick={() => window.location.reload()}>Gửi thêm một lời chúc nữa</Button>
+                        <Button onClick={() => window.location = `/getWish`}>Xem các lời chúc</Button>
                     </div>
                 )
             }

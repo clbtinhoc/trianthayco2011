@@ -15,7 +15,7 @@ export default class LoadingPopup extends React.Component {
             'background-color': "rgb(255, 255, 255)",
             border: "1px solid gray",
             "border-radius": "5px",
-            position: "absolute", 
+            position: "fixed", 
             top: 0,
             width: "60%",
             "max-height": "8vh"
