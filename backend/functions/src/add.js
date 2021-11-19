@@ -28,11 +28,21 @@ router.post('/add', (req, res) => {
                         wish: data.content.wish
                     }
                 ],
+            }).then(() => {
+                admin.firestore().collection('Content').doc(data.content.teacherName).get().then(doc => {
+                    console.log(doc.data())
+                    res.status(200).send({ index: doc.data().wishes.length })
+                }
+                )
+            }).catch(err => {
+                res.status(400).send({
+                    message: JSON.stringify(err.message),
+                })
+                // Get the error details.
+
             })
-            res.send({
-                status: "success",
-                message: "Wish added"
-            })
+
+
         }
         else {
             admin.firestore().collection('Content').doc(data.content.teacherName).update({
@@ -41,21 +51,33 @@ router.post('/add', (req, res) => {
                     wish: data.content.wish
                 })
             })
-            res.send({
-                status: "success",
-                message: "Wish added"
-            })
-            
-        }
+            // Res.send array length of wishes firestore collection Content document teacherName
+            admin.firestore().collection('Content').doc(data.content.teacherName).get().then(doc => {
+                console.log(doc.data())
+                res.status(200).send({ index: doc.data().wishes.length });
+            }
+            ).then(() => {
+                admin.firestore().collection('Content').doc(data.content.teacherName).get().then(doc => {
+                    console.log(doc.data())
+                    res.status(200).send({ index: doc.data().wishes.length });
+                }
+                ).catch(err => {
+                    res.status(400).send({
+                        message: JSON.stringify(err.message),
+                    })
+                    // Get the error details.
 
-    }
-    ).catch(err => {
-        res.send({
-            status: 'failed',
+                })
+
+            })
+        }
+    }).catch(err => {
+        
+        res.status(400).send({
             message: JSON.stringify(err.message),
         })
-       // Get the error details.
-         
+        // Get the error details.
+
     })
 
 })

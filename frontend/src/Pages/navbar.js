@@ -14,12 +14,12 @@ export default function Navbar() {
             </Link>
             <Link className="navbar-brand" to="/start-getwish">
                 <FaSearch className="navbar-icon" />
-                &nbsp;Find wishes
+                &nbsp;Tổng hợp lời chúc
 
             </Link>
             <Link className="navbar-brand" to="/new-wish">
                 <AiOutlinePlusCircle className="navbar-icon" />
-                &nbsp;Create a wish
+                &nbsp;Tạo lời chúc
 
             </Link>
         </nav>

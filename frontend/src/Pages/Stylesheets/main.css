@@ -84,7 +84,8 @@
 }
 
 body {
-    background: url("https://media3.giphy.com/media/pcN9RH7X2Ah7G/giphy.gif") no-repeat center center fixed; 
+    /* background: url('../../Assets/background.svg') no-repeat center center fixed;  */
+    background-color: #fff3e3;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
