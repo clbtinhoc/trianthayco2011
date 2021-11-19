@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Select from 'react-select';
 
 import './Stylesheets/find-wishes.css'
 
@@ -60,12 +59,11 @@ export default class StartGetwish extends React.Component {
             return (
                 <div>
                     <form className="searchbar" action="">
-                        <input type="text" className="text" placeholder="Search Bar" name="search"
+                        <input type="text" className="text" placeholder="Tìm tên thầy/cô" name="search"
                             onChange={(e) => {
                                 setSearchTerm(e.target.value)
                             }}
                         />
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                     <div className="listgv">
                         {perTeacherList}

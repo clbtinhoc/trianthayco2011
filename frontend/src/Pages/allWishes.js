@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
+import teacherNameFrame from '../Assets/teacherNameFrame.png'
+
 import LoadingPopup from './MiniComponents/LoadingPopup';
 import WarningPopup from './MiniComponents/WarningPopup';
 
@@ -113,8 +115,10 @@ class RenderWish extends React.Component {
         if (this.state.ok) {
             return (
                 <div style={{width:"70%", margin:"auto"}}>
-                    
-                    <h3 style={{textAlign:"center", color:"white"}}>{this.state.teacherName}</h3>
+                    <div className="teacherNameContainer">
+                        <img src={teacherNameFrame} />
+                        <div class="teacherNameText">{this.state.teacherName}</div>
+                    </div>
                     <div className="wishes">
                         {wishes}
                     </div>

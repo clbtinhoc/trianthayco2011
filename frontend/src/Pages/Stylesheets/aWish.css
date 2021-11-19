@@ -1,28 +1,100 @@
-.wish-container{
-    font-size: 1.2em;
-    width: 20vw;;
-    word-wrap: normal;
-    margin: auto;
-    background-color: white;
-    padding: 1vw;
-    border-radius: 3px;
-}
 .controls{
+    text-align: center;
     background-color: white;
-    width: 20vw;
+    width: 32vw;
     margin:auto;
     padding: 1vw;
     margin-top: 2%;
     border-radius: 3px;
 }
-@media screen and (max-width: 445px) {
-    .wish-container{
-        width: 100%
-    }
 
+.controls:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 #Rendered {
     display: flex;
     justify-content: center;
+}
+
+.imgContainer{
+    position: relative;
+    text-align: center;
+    font-family: sans-serif;
+    width: 60%;
+    margin: auto;
+}
+
+.mainImg {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.mainText {
+    position: absolute;
+    font-family: sans-serif;
+    z-index: 2;
+    max-height: 100px;
+    font-weight: 400;
+    line-height: 36px;
+    text-align: center;
+    font-size: 24px;
+    margin: 0px 10%;
+    top: 22.5%;
+    text-shadow: 3px 0px 4px rgba(0, 0, 0, 0.2);
+}
+
+.miniText {
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 100;
+    bottom: 12.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 1080px) {
+    .imgContainer {
+        width: 100%;
+    }
+
+    .mainText {
+        font-size: 18px;
+        margin: 0px 10%;
+        line-height: 24px;
+        top: 25%;
+    }
+
+    .miniText {
+        font-size: 18px;
+        font-weight: 100;
+        bottom: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .imgContainer {
+        width: 100%;
+    }
+
+    .mainText {
+        font-size: 10px;
+        line-height: 12px;
+        margin: 0px 7.5%;
+        top: 20%;
+    }
+
+    .miniText {
+        font-size: 8px;
+        font-weight: 100;
+        bottom: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }

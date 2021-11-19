@@ -16,12 +16,12 @@
 .teacherName:hover {
     border-color: #50402A;
     color: #50402A;
-    background-color: #FFF3E3;
+    background-color: #E6C9A5;
 }
 
 
 .listgv{
-    background-color: #FFEBD0;
+    background-color: #ffebd0;
     display: grid;
     gap: 15px 10px;
     grid-template-columns: auto auto auto auto;

@@ -5,6 +5,8 @@ import { BsLink45Deg } from "react-icons/bs";
 import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
 
+import letter from '../Assets/Group 1.png'
+
 import LoadingPopup from './MiniComponents/LoadingPopup';
 import WarningPopup from './MiniComponents/WarningPopup';
 
@@ -104,10 +106,8 @@ class Renderer extends React.Component {
             Rendered = function () {
                 return (
                     <div>
- 
-                        <Card style={{ width: "fit-content", margin: "auto" }} >
+                        {/* <Card style={{ width: "fit-content", margin: "auto" }} >
                             <Card.Body>
-
                                 <Card.Title style={{whiteSpace: "pre-line"}}>
                                     {data.wish}
                                 </Card.Title>
@@ -115,18 +115,24 @@ class Renderer extends React.Component {
                                     Từ {message}
                                 </Card.Text>
                             </Card.Body>
-                        </Card>
+                        </Card> */}
+
+                        <div className="imgContainer">
+                                <div className="mainText">{data.wish}</div>
+                                <div className="miniText">Từ {message}</div>
+                                <img src={letter} className="mainImg"/>
+                        </div>
                         <div className="controls">
-                            Share to your friends or your teacher!
+                            Chia sẻ lời chúc này cho người thân
                             <div className="copyLink" onClick={() => {
                                 var copyText = document.getElementById("link");
                                 // Copy text in copyText
                                 copyText.select();
                                 copyText.setSelectionRange(0, 99999); /* For mobile devices */
                                 navigator.clipboard.writeText(copyText.value);
-                                alert("Copied!")
+                                alert("Sao chép thành công!")
                             }}>
-                                <BsLink45Deg /> Copy link
+                                <BsLink45Deg /> Sao chép đường link
 
                             </div>
                             <input hidden id="link" value={`https://localhost:3000/getwish/${teacherName}/${index}`} />
@@ -140,7 +146,6 @@ class Renderer extends React.Component {
                 return (
                     <div>
                         <p>Lời chúc này không tồn tại</p>
-                    
                     </div>
 
                 )
