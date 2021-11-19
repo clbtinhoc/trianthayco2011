@@ -41,7 +41,7 @@ class RenderWish extends React.Component {
                 author: data.identity.name,
                 class: "lớp " + data.identity.class,
                 year: "vào trường vào năm " + data.identity.year,
-                preview: data.wish + "...",
+                preview: data.wish.slice(0, 20) + "...",
             }
             if (data.identity.name === null || data.identity.name === "") {
                 wish.author = ""
