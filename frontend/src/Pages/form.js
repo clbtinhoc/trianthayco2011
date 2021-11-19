@@ -171,7 +171,7 @@ export default class FormToReg extends React.Component {
         })        
             if (!this.state.submit) {
                 return (
-                    <div id="container" aspectRatio="">
+                    <div id="container">
                         <div id="formContainer">
                             <div className="decor">
                                 <img
@@ -304,12 +304,14 @@ export default class FormToReg extends React.Component {
             }
             else {
                 return (
-                    <div id="formContainer">
-                        <h1>Cám ơn bạn đã tham gia!</h1>
-                        
-                        <Button onClick={() => window.location.reload()}>Gửi thêm một lời chúc nữa</Button>
-                        <Button onClick={() => window.location = `/getWish`}>Xem các lời chúc</Button>
+                    <div id="container">
+                        <div id="formContainer">
+                            <h1>Cám ơn bạn đã tham gia!</h1>
+                            
+                            <Button onClick={() => window.location.reload()}>Gửi thêm một lời chúc nữa</Button>
+                        </div>
                     </div>
+
                 )
             }
         

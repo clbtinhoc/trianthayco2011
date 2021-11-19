@@ -3,24 +3,37 @@ import { useParams } from "react-router-dom";
 import "./Stylesheets/aWish.css"
 import { BsLink45Deg } from "react-icons/bs";
 import Card from "react-bootstrap/Card";
+import Button from 'react-bootstrap/Button';
+
+import LoadingPopup from './MiniComponents/LoadingPopup';
+import WarningPopup from './MiniComponents/WarningPopup';
+
 class Renderer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             wish: null,
-            // loading: true
+            loading: false,
+            errorMsg: null,
+            errorTimeout: null,
         }
     }
     componentDidMount() {
-        fetch(`http://localhost:5001/tri-an-2011/asia-east2/apigetWishes/${this.props.params.teacher}/${this.props.params.index}`)
+        this.setState({loading: true});
+        fetch(`http://localhost:5001/tri-an-2011/asia-east2/api/getWishes/${this.props.params.teacher}/${this.props.params.index}`)
             .then(res => res.json())
             .then(data => {
-
+                this.setState({ });
                 this.setState({
                     wish: data,
+                    loading: false
                 })
 
             })
+            .catch(err => {
+                this.setState({ errorMsg: err.message, errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
+                this.setState({ ok: false, loading: false, errorMsg: err.message });
+            });
     }
     render() {
         let data = this.state.wish
@@ -31,8 +44,8 @@ class Renderer extends React.Component {
             let preview = JSON.stringify(data.wish)
             let wish = {
                 author: "" + JSON.stringify(data.identity.name),
-                class: "class " + JSON.stringify(data.identity.class),
-                year: "joined school in year " + JSON.stringify(data.identity.year),
+                class: "lớp " + JSON.stringify(data.identity.class),
+                year: "năm học " + JSON.stringify(data.identity.year),
                 preview: JSON.stringify(data.wish).substring(1, data.wish.length - 1),
             }
             console.log(data.identity.name === null)
@@ -48,7 +61,7 @@ class Renderer extends React.Component {
             let message;
             // Set message to <p>Một bạn ẩn danh</p> if every property in wish is null
             if (wish.author === "" && wish.class === "" && wish.year === "") {
-                message = "Anonymous"
+                message = "một bạn ẩn danh"
             }
             else {
                 message = `${wish.author} ${wish.class} ${wish.year}`
@@ -88,12 +101,13 @@ class Renderer extends React.Component {
             Rendered = function () {
                 return (
                     <div>
+                        <Button onClick={() => {window.location = `./`}}>Quay lại</Button>
                         <Card style={{ width: "fit-content", margin: "auto" }} >
                             <Card.Body>
 
                                 <Card.Title>{wish.preview}</Card.Title>
                                 <Card.Text>
-                                    This wish is from {message}
+                                    Từ {message}
                                 </Card.Text>
                             </Card.Body>
                         </Card>
@@ -118,7 +132,7 @@ class Renderer extends React.Component {
         }
         else {
             Rendered = function () {
-                return (<p>This wish doesn't exist</p>)
+                return (<p>Lời chúc này không tồn tại</p>)
             }
         }
         return (
