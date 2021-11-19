@@ -79,12 +79,13 @@ class RenderWish extends React.Component {
             //         </div>
             //     </div>
             // )
+            console.log(wish.preview)
             return(
                 <Card style={{width:'18rem', marginLeft: "2%"}}>
                     <Card.Body>
-                        <Card.Title>{wish.preview}</Card.Title>
-                        <Card.Text>
-                            From {message}
+                        <Card.Title dangerouslySetInnerHTML={{__html: `${wish.preview}`}}></Card.Title>
+                        <Card.Text dangerouslySetInnerHTML={{__html: `From ${message}`}}>
+                            
                         </Card.Text>
                         <Button variant="primary" onClick={
                             ()=>{

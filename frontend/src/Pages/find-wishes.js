@@ -36,7 +36,7 @@ export default class StartGetwish extends React.Component {
                         this.setState({
                             value: selectedValue.value
                         })
-                        window.location = `/getWish/${selectedValue.value}`
+                        window.location = `/getwish/${selectedValue.value}`
                     }}
                     options={this.state.options}
                     placeholder="Select a teacher"

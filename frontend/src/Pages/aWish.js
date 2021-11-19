@@ -92,9 +92,7 @@ class Renderer extends React.Component {
                             <Card.Body>
 
                                 <Card.Title>{wish.preview}</Card.Title>
-                                <Card.Text>
-                                    This wish is from {message}
-                                </Card.Text>
+                                <Card.Text dangerouslySetInnerHTML={{__html: `This wish is from ${message}`}}></Card.Text>
                             </Card.Body>
                         </Card>
                         <div className="controls">
