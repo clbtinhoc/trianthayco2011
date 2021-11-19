@@ -12,7 +12,7 @@ class Renderer extends React.Component {
         }
     }
     componentDidMount() {
-        fetch(`http://localhost:5001/tri-an-2011/asia-east2/apigetWishes/${this.props.params.teacher}/${this.props.params.index}`)
+        fetch(`http://localhost:5001/tri-an-2011/asia-east2/api/getWishes/${this.props.params.teacher}/${this.props.params.index}`)
             .then(res => res.json())
             .then(data => {
 
@@ -28,14 +28,15 @@ class Renderer extends React.Component {
         let teacherName = this.props.params.teacher
         let index = this.props.params.index
         if (data != null) {
-            let preview = JSON.stringify(data.wish)
+        
             let wish = {
-                author: "" + JSON.stringify(data.identity.name),
-                class: "class " + JSON.stringify(data.identity.class),
-                year: "joined school in year " + JSON.stringify(data.identity.year),
-                preview: JSON.stringify(data.wish).substring(1, data.wish.length - 1),
+                author: "" + data.identity.name,
+                class: "class " + data.identity.class,
+                year: "joined school in year " + data.identity.year,
+                preview: data.wish,
             }
-            console.log(data.identity.name === null)
+            console.log(data.wish)
+            // console.log(data.identity.name === null)
             if (data.identity.name === null || data.identity.name === "") {
                 wish.author = ""
             }
@@ -53,6 +54,7 @@ class Renderer extends React.Component {
             else {
                 message = `${wish.author} ${wish.class} ${wish.year}`
             }
+            
             // Rendered = function () {
             //     return (
             //         <div>
@@ -86,12 +88,15 @@ class Renderer extends React.Component {
             // }
 
             Rendered = function () {
+                
                 return (
                     <div>
                         <Card style={{ width: "fit-content", margin: "auto" }} >
                             <Card.Body>
 
-                                <Card.Title>{wish.preview}</Card.Title>
+                                <Card.Title style={{whiteSpace: "pre-line"}}>
+                                    {data.wish}
+                                </Card.Title>
                                 <Card.Text>
                                     This wish is from {message}
                                 </Card.Text>
@@ -110,7 +115,7 @@ class Renderer extends React.Component {
                                 <BsLink45Deg /> Copy link
 
                             </div>
-                            <input hidden id="link" value={`https://tri-an-2011.web.app/getwish/${teacherName}/${index}`} />
+                            <input hidden id="link" value={`https://localhost:3000/getwish/${teacherName}/${index}`} />
                         </div>
                     </div>
                 )

@@ -4,7 +4,7 @@ import "./Stylesheets/form.css"
 import Select from 'react-select';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
+import { BsLink45Deg } from "react-icons/bs";
 import LoadingPopup from "./MiniComponents/LoadingPopup";
 import WarningPopup from "./MiniComponents/WarningPopup";
 
@@ -46,7 +46,8 @@ export default class FormToReg extends React.Component {
             loading: false,
             errorMsg: null,     
             errorTimeout: null,
-            debug: true, //REMEMBER TO SET TO FALSE FOR PRODUCTION
+            debug: true, //REMEMBER TO SET TO FALSE FOR PRODUCTION lol k
+            indexNumber: 0,
         }
         this.years = [{ value: "2016-2017", label: "2016-2017" },
         { value: "2017-2018", label: "2017-2018" },
@@ -107,7 +108,7 @@ export default class FormToReg extends React.Component {
         }).then(res => res.json())
             .then(text => {
                 console.log('success:', text)
-                this.setState({ submit: true, loading: false});
+                this.setState({ submit: true, loading: false, index: text.index});
             })
             .catch(error =>{
                 console.log('error: ', error)
@@ -306,7 +307,21 @@ export default class FormToReg extends React.Component {
                 return (
                     <div id="formContainer">
                         <h1>Cám ơn bạn đã tham gia!</h1>
-                        
+                        <div className="controls">
+                            Chia sẻ cho thầy cô và bạn bè của bạn!
+                            <div className="copyLink" onClick={() => {
+                                var copyText = document.getElementById("link");
+                                // Copy text in copyText
+                                copyText.select();
+                                copyText.setSelectionRange(0, 99999); /* For mobile devices */
+                                navigator.clipboard.writeText(copyText.value);
+                                alert("Copied!")
+                            }}>
+                                <BsLink45Deg /> Copy link
+
+                            </div>
+                            <input hidden id="link" value={`http://localhost:3000/getwish/${this.state.teacher}/${this.state.index}`} />
+                        </div>
                         <Button onClick={() => window.location.reload()}>Gửi thêm một lời chúc nữa</Button>
                         <Button onClick={() => window.location = `/getWish`}>Xem các lời chúc</Button>
                     </div>

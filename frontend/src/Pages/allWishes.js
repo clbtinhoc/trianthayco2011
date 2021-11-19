@@ -14,7 +14,7 @@ class RenderWish extends React.Component {
         }
     }
     componentDidMount() {
-        fetch(`http://localhost:5001/tri-an-2011/asia-east2/apigetWishes/${this.state.teacherName}`)
+        fetch(`http://localhost:5001/tri-an-2011/asia-east2/api/getWishes/${this.state.teacherName}`)
             .then(res => res.json())
             .then(data => {
                 this.setState({ wishes: data });
@@ -38,10 +38,10 @@ class RenderWish extends React.Component {
             // let preview = JSON.stringify(data.content.wish).substring(0, 20)
             // let preview = JSON.stringify(data.wish) 
             let wish = {
-                author: JSON.stringify(data.identity.name).substring(1, JSON.stringify(data.identity.name).length - 1),
-                class: "class " + JSON.stringify(data.identity.class).substring(1, JSON.stringify(data.identity.class).length - 1),
-                year: "joined the school in year " + JSON.stringify(data.identity.year).substring(1, JSON.stringify(data.identity.year).length - 1),
-                preview: JSON.stringify(data.wish).substring(1, data.wish.length - 1).slice(0, 20) + "...",
+                author: data.identity.name,
+                class: "lớp " + data.identity.class,
+                year: "vào trường vào năm " + data.identity.year,
+                preview: data.wish + "...",
             }
             if (data.identity.name === null || data.identity.name === "") {
                 wish.author = ""
