@@ -97,7 +97,7 @@ export default class FormToReg extends React.Component {
             this.setState({loading: false, errorMsg:"Mong muốn quá dài, vui lòng thử lại", errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
             return 0;
         }
-        
+
         fetch("https://asia-east2-tri-an-2011.cloudfunctions.net/api/add", {
             method: "POST",
             headers: {
@@ -284,8 +284,8 @@ export default class FormToReg extends React.Component {
                                     
                                 </Form.Group>
                                 <Form.Group controlId="formBasicWish" className="formInputName formGroup">
-                                    <Form.Label>Điều bạn muốn gửi gấm đến thầy/cô (dưới 100 từ)</Form.Label>
-                                    <Form.Control as="textarea" rows="3"  maxlength="100" required onChange={
+                                    <Form.Label>Điều bạn muốn gửi gấm đến thầy/cô (dưới 300 kí tự)</Form.Label>
+                                    <Form.Control as="textarea" rows="3"  maxlength="300" required onChange={
                                         (e) => { this.setState({ wish: e.target.value }) }}
                                     />
                                 </Form.Group>
