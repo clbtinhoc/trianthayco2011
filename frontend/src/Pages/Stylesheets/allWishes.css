@@ -12,6 +12,28 @@
     /* flex-wrap: wrap; */
 }
 
+.teacherNameContainer {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.teacherNameContainer img{
+    max-width: 400px;
+}
+
+.teacherNameText {
+    font-family: displayFont;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    font-weight: 400;
+    color: #ff8b1f;
+}
+  
+
 @media screen and (max-width: 445px) {
     .wish{
         background-color: whitesmoke;
@@ -25,5 +47,27 @@
         flex-wrap: wrap;
     }
     
+    .teacherNameContainer img{
+        width: 100%;
+    }
     
+    .teacherNameText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 40px;
+        font-weight: 600;
+        color: #ff8b1f;
+    }
+}
+
+@font-face {
+    font-family:'displayFont';
+	src:
+		url('../../Assets/font/SVN-DessertMenuScript.woff2') format('woff2'),
+		url('../../Assets/font/SVN-DessertMenuScript.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
 }

@@ -1,0 +1,123 @@
+.teacherName {
+    font-family: sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    color: #90744c;
+    font-size: 24px;
+    min-width: 300px;
+    border: 3px solid #90744c;
+    border-radius: 20px;
+    padding: 7px 0 7px 0;
+    text-align: center;
+    justify-content: space-evenly;
+    background-color: #FFF3E3;
+}
+
+.teacherName:hover {
+    border-color: #50402A;
+    color: #50402A;
+    background-color: #E6C9A5;
+}
+
+
+.listgv{
+    background-color: #ffebd0;
+    display: grid;
+    gap: 15px 10px;
+    grid-template-columns: auto auto auto auto;
+    margin: 15px 0px;
+    padding: 15px;
+    border: 2px solid #90744c
+}
+
+#listTeacher {
+    background-color: #FFEBD0;
+    width: 8vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    border: 2px solid #90744c;
+}
+
+
+.titleImage{
+    left: 10px;
+    margin: auto;
+    position: relative;
+    text-align: center;
+    max-width: 700px;
+    justify-content: center;
+}
+
+
+.main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.searchbar{
+    color: #90744c;
+    width: 100%;
+    margin-top: 10px;
+    background-color: #FFF3E3;
+}
+
+.searchbar .text{
+    border-style: solid;
+    border-color: #90744c;
+    border-radius: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+}
+
+
+::-webkit-input-placeholder {
+    text-align: center;
+    color: #90744c;
+    font-size: 15px;
+  }
+
+.searchbar button{
+    background: #FFF3E3;
+    color: #90744c;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1080px) {
+    .listgv {
+        grid-template-columns: auto auto;
+    }
+
+    .teacherName {
+        font-size: 24px;
+    }
+
+    .titleImage {
+        width: 500px;
+    }
+
+    .searchbar .text{
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .listgv {
+        grid-template-columns: auto;
+    }
+
+    .teacherName {
+        font-size: 20px;
+    }
+
+    .titleImage {
+        left: -25px;
+        width: 130%;
+    }
+}

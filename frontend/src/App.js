@@ -11,6 +11,7 @@ import GetAWish from "./Pages/aWish";
 import Navbar from "./Pages/navbar";
 import Main from "./Pages/main";
 import StartGetwish from "./Pages/find-wishes";
+import Footer from "./Pages/footer";
 // The form is gonna be the main page lol
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         </Route>
         <Route path="/start-getwish" element={<StartGetwish />}/>
       </Routes>
+      <Footer />
     </BrowserRouter>
 
   );

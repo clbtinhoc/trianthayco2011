@@ -3,6 +3,12 @@ import "./Stylesheets/allWishes.css"
 import { useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+
+import teacherNameFrame from '../Assets/teacherNameFrame.png'
+
+import LoadingPopup from './MiniComponents/LoadingPopup';
+import WarningPopup from './MiniComponents/WarningPopup';
+
 class RenderWish extends React.Component {
     constructor(props) {
         super(props);
@@ -10,16 +16,23 @@ class RenderWish extends React.Component {
         this.state = {
             wishes: [],
             teacherName: props.name,
+            loading: false,
+            errorMsg: null,
             ok: true,
         }
     }
     componentDidMount() {
+        clearInterval(this.state.errorTimeout)
+        this.setState({loading: true})
         fetch(`https://asia-east2-tri-an-2011.cloudfunctions.net/api/getWishes/${this.state.teacherName}`)
             .then(res => res.json())
             .then(data => {
-                this.setState({ wishes: data });
+                this.setState({ wishes: data, ok: true, loading: false});
             })
-            .catch(err => this.setState({ ok: false }));
+            .catch(err => {
+                this.setState({ errorMsg: err.message, errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
+                this.setState({ ok: false, loading: false, errorMsg: err.message });
+            });
     }
     render() {
         console.log(this.state.quotes)
@@ -44,7 +57,7 @@ class RenderWish extends React.Component {
                 preview: data.wish.slice(0, 20) + "...",
             }
             if (data.identity.name === null || data.identity.name === "") {
-                wish.author = ""
+                wish.author = "một bạn ẩn danh"
             }
             if (data.identity.class === null || data.identity.class === "") {
                 wish.class = ""
@@ -55,7 +68,7 @@ class RenderWish extends React.Component {
             let message;
             // Set message to <p>Một bạn ẩn danh</p> if every property in wish is null
             if (wish.author === "" && wish.class === "" && wish.year === "") {
-                message = " anonymous"
+                message = "một bạn ẩn danh"
             }
             else {
                 message = `${wish.author} ${wish.class} ${wish.year}`
@@ -103,21 +116,36 @@ class RenderWish extends React.Component {
         if (this.state.ok) {
             return (
                 <div style={{width:"70%", margin:"auto"}}>
-                    <h3 style={{textAlign:"center", color:"black"}}>Đang thể hiện lời chúc cho {this.state.teacherName}</h3>
+                    <div className="teacherNameContainer">
+                        <img src={teacherNameFrame} alt="khung tên"/>
+                        <div class="teacherNameText">{this.state.teacherName}</div>
+                    </div>
                     <div className="wishes">
                         {wishes}
                     </div>
+                    <WarningPopup warn={this.state.errorMsg} />
+                    <LoadingPopup loading={this.state.loading} loadingMsg="Đang tải các lời chúc..."/> 
                 </div>
             )
         }
         else {
             return (
-                <p>Data is not found for this teacher</p>
+                <div>
+                    <p style={{margin: "auto",}}>KHÔNG TÌM ĐƯỢC CÁC LỜI CHÚC</p>
+                    <p>Lỗi: {this.state.errorMsg}</p>
+                </div>
+
             )
         }
     }
 }
 export default function AllWishes() {
     let params = useParams();
-    return <RenderWish name={params.teacher} />
+    return (
+        <div>
+            <Button onClick={() => {window.location = '/start-getwish'}} style={{"margin-left": "10vw"}}>Quay Lại</Button>
+            <RenderWish name={params.teacher} />
+        </div>
+       
+    )
 }

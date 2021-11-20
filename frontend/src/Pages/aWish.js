@@ -2,38 +2,52 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "./Stylesheets/aWish.css"
 import { BsLink45Deg } from "react-icons/bs";
-import Card from "react-bootstrap/Card";
+import Button from 'react-bootstrap/Button';
+
+import letter from '../Assets/Group 1.png'
+
+import LoadingPopup from './MiniComponents/LoadingPopup';
+import WarningPopup from './MiniComponents/WarningPopup';
+
 class Renderer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            ok: true,
             wish: null,
-            // loading: true
+            loading: true,
+            errorMsg: null,
         }
     }
     componentDidMount() {
         fetch(`https://asia-east2-tri-an-2011.cloudfunctions.net/api/getWishes/${this.props.params.teacher}/${this.props.params.index}`)
             .then(res => res.json())
             .then(data => {
-
+                this.setState({ });
                 this.setState({
+                    ok: true,
                     wish: data,
+                    loading: false
                 })
 
             })
+            .catch(err => {
+                this.setState({ errorMsg: err.message})
+                this.setState({ ok: false, loading: false, errorMsg: err.message });
+            });
     }
     render() {
         let data = this.state.wish
         let Rendered;
         let teacherName = this.props.params.teacher
         let index = this.props.params.index
-        if (data != null) {
+        if (data != null && this.state.ok) {
         
             let wish = {
-                author: "" + data.identity.name,
-                class: "class " + data.identity.class,
-                year: "joined school in year " + data.identity.year,
-                preview: data.wish,
+                author: "" + JSON.stringify(data.identity.name),
+                class: "lớp " + JSON.stringify(data.identity.class),
+                year: "năm học " + JSON.stringify(data.identity.year),
+                preview: JSON.stringify(data.wish).substring(1, data.wish.length - 1),
             }
             console.log(data.wish)
             // console.log(data.identity.name === null)
@@ -49,7 +63,7 @@ class Renderer extends React.Component {
             let message;
             // Set message to <p>Một bạn ẩn danh</p> if every property in wish is null
             if (wish.author === "" && wish.class === "" && wish.year === "") {
-                message = "Anonymous"
+                message = "một bạn ẩn danh"
             }
             else {
                 message = `${wish.author} ${wish.class} ${wish.year}`
@@ -88,31 +102,35 @@ class Renderer extends React.Component {
             // }
 
             Rendered = function () {
-                
                 return (
                     <div>
-                        <Card style={{ width: "fit-content", margin: "auto" }} >
+                        {/* <Card style={{ width: "fit-content", margin: "auto" }} >
                             <Card.Body>
-
                                 <Card.Title style={{whiteSpace: "pre-line"}}>
                                     {data.wish}
                                 </Card.Title>
                                 <Card.Text>
-                                    This wish is from {message}
+                                    Từ {message}
                                 </Card.Text>
                             </Card.Body>
-                        </Card>
+                        </Card> */}
+
+                        <div className="imgContainer">
+                                <div className="mainText">{data.wish}</div>
+                                <div className="miniText">Từ {message}</div>
+                                <img src={letter} className="mainImg" alt="Nền bức thư"/>
+                        </div>
                         <div className="controls">
-                            Share to your friends or your teacher!
+                            Chia sẻ lời chúc này cho người thân
                             <div className="copyLink" onClick={() => {
                                 var copyText = document.getElementById("link");
                                 // Copy text in copyText
                                 copyText.select();
                                 copyText.setSelectionRange(0, 99999); /* For mobile devices */
                                 navigator.clipboard.writeText(copyText.value);
-                                alert("Copied!")
+                                alert("Sao chép thành công!")
                             }}>
-                                <BsLink45Deg /> Copy link
+                                <BsLink45Deg /> Sao chép đường link
 
                             </div>
                             <input hidden id="link" value={`https://tri-an-2011.web.app/getwish/${teacherName}/${index}`} />
@@ -123,11 +141,22 @@ class Renderer extends React.Component {
         }
         else {
             Rendered = function () {
-                return (<p>This wish doesn't exist</p>)
+                return (
+                    <div>
+                        <p>Lời chúc này không tồn tại</p>
+                    </div>
+
+                )
             }
         }
         return (
-            <Rendered />
+            <div id="Rendered">
+                
+                <WarningPopup warn={this.state.errorMsg}/>
+                <LoadingPopup loading={this.state.loading} loadingMsg="Đang tải lời chúc..."/>
+                <Rendered style={{visibility: this.state.loading ? "hidden" : "visible"}} />
+            </div>
+
         )
     }
 }
@@ -136,5 +165,10 @@ class Renderer extends React.Component {
 export default function GetAWish() {
     let params = useParams();
     console.log(params);
-    return <Renderer params={params} />
+    return (
+    <div>
+        <Button onClick={() => {window.location = "./"}} style={{"margin-left": "10vw"}}> Quay Lại </Button>
+        <Renderer params={params} />
+    </div>
+    )
 }
