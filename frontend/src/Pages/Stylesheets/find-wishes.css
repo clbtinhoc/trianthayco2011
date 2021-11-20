@@ -62,16 +62,18 @@
     color: #90744c;
     width: 100%;
     margin-top: 10px;
-    background-color: #FFF3E3;
+    /* background-color: #FFF3E3; */
 }
 
 .searchbar .text{
     border-style: solid;
-    border-color: #90744c;
+    border-color: #4e4a44;
     border-radius: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
-    
+    margin:auto;
+    text-align: center;
+    width:100%;
 }
 
 

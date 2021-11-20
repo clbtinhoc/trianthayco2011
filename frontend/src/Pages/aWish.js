@@ -8,7 +8,7 @@ import letter from '../Assets/Group 1.png'
 
 import LoadingPopup from './MiniComponents/LoadingPopup';
 import WarningPopup from './MiniComponents/WarningPopup';
-
+import useFitText from 'use-fit-text';
 class Renderer extends React.Component {
     constructor(props) {
         super(props);
@@ -18,6 +18,7 @@ class Renderer extends React.Component {
             loading: true,
             errorMsg: null,
         }
+        
     }
     componentDidMount() {
         fetch(`https://asia-east2-tri-an-2011.cloudfunctions.net/api/getWishes/${this.props.params.teacher}/${this.props.params.index}`)
@@ -116,7 +117,9 @@ class Renderer extends React.Component {
                         </Card> */}
 
                         <div className="imgContainer">
-                                <div className="mainText">{data.wish}</div>
+                                <div className="mainText">
+                                    <TextRenderer text={data.wish} />
+                                </div>
                                 <div className="miniText">Từ {message}</div>
                                 <img src={letter} className="mainImg" alt="Nền bức thư"/>
                         </div>
@@ -170,5 +173,13 @@ export default function GetAWish() {
         <Button onClick={() => {window.location = "./"}} style={{"margin-left": "10vw"}}> Quay Lại </Button>
         <Renderer params={params} />
     </div>
+    )
+}
+function TextRenderer(props){
+    const {fontSize, ref } = useFitText();
+    return (
+        <div style={{fontSize: fontSize, whiteSpace: "pre-line"}} ref={ref}>
+            {props.text}
+        </div>
     )
 }

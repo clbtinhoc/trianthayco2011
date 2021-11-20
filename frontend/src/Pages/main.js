@@ -21,24 +21,26 @@ export default class Main extends React.Component {
                     <div className="teacherthing">
                         <h2 style={{ margin: 0, padding: 0 }}> nhân ngày </h2>
 
-                    {/* <div className="something"> */}
-                    <h2 style={{ fontSize: "6rem", margin: 0 }}
-                        className="teacherthinglol">20/11</h2>
+                        {/* <div className="something"> */}
+                        <h2 style={{ fontSize: "6rem", margin: 0 }}
+                            className="teacherthinglol">20/11</h2>
 
-                </div>
-                <div className="buttons-to-redirect">
-                    <div id="button-1">
-                        <Link to="/start-getwish">
-                            Tìm những lời chúc đã được chia sẽ
-                        </Link>
                     </div>
-                    <div id="button-2">
-                        <Link to="/new-wish">
-                            Tạo lời chúc
-                        </Link>
+                    <div className="buttons-to-redirect">
+                        <div id="button-1">
+                            <Link to="/start-getwish">
+                                Tìm những lời chúc đã được chia sẽ
+                            </Link>
+                        </div>
+                        <div id="button-2">
+                            <Link to="/new-wish">
+                                Tạo lời chúc
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
         )
     }
+
 }

@@ -89,6 +89,15 @@ export default class FormToReg extends React.Component {
             this.setState({loading: false, errorMsg:"Vui lòng nhập tên thầy cô", errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
             return 0;
         }
+        if(this.state.wish === ""){
+            this.setState({loading: false, errorMsg:"Vui lòng nhập mong muốn", errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
+            return 0;
+        }
+        if(this.state.wish.split(" ").length > 100){
+            this.setState({loading: false, errorMsg:"Mong muốn quá dài, vui lòng thử lại", errorTimeout: setTimeout(() => this.setState({errorMsg: null}), 3000)})
+            return 0;
+        }
+        
         fetch("https://asia-east2-tri-an-2011.cloudfunctions.net/api/add", {
             method: "POST",
             headers: {
@@ -305,7 +314,7 @@ export default class FormToReg extends React.Component {
             }
             else {
                 return (
-                    <div id="formContainer">
+                    <div id="formContainer" style={{backgroundColor: "white"}}>
                         <h1>Cám ơn bạn đã tham gia!</h1>
                         <div className="controls">
                             Chia sẻ cho thầy cô và bạn bè của bạn!
