@@ -332,7 +332,7 @@ export default class FormToReg extends React.Component {
                             <input hidden id="link" value={`https://tri-an-2011.web.app/getwish/${this.state.teacher}/${this.state.index}`} />
                         </div>
                         <Button onClick={() => window.location.reload()} style={{marginBottom: "1%"}}>Gửi thêm một lời chúc nữa</Button>
-                        <Button onClick={() => window.location = `/getWish`}>Xem các lời chúc</Button>
+                        <Button onClick={() => window.location = `/start-getwish`}>Xem các lời chúc</Button>
                     </div>
 
                 )
