@@ -82,10 +82,21 @@
     -webkit-text-fill-color: transparent;
     margin: 0;
 }
-
+/* 
 body {
-    /* background: url('../../Assets/background.svg') no-repeat center center fixed;  */
+    background: url('../../Assets/background.svg') no-repeat center center fixed;   
     background-color: #fff3e3;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /* background-image: url("../../Assets/background.png"); 
+    /* background-repeat: repeat; 
+    padding: 0;
+    margin: 0;
+} */
+body {
+    background: url("https://media3.giphy.com/media/pcN9RH7X2Ah7G/giphy.gif") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -94,6 +105,7 @@ body {
     padding: 0;
     margin: 0;
 }
+
 
 .buttons-to-redirect {
     text-align: center;
@@ -280,6 +292,7 @@ body {
         border: black solid 1px;
         border-radius: 8px;
         transition: 0.5s ease;
+        height: 10vh;
     }
     
     #button-1 a:hover {
@@ -300,8 +313,7 @@ body {
     }
     
     #button-1 #button-2 {
-        width: 5vw;
-        height: 5vh;
+        /* width: 5vw;   */
     }
     
     #button-2 a:hover {
